@@ -8,8 +8,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from time import sleep
 import os
-import Setup
-
 #headers = {
 #    " Accept": "application/json, text/plain, */*",  
 #    " User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.134 YaBrowser/22.7.0.1842 Yowser/2.5 Safari/537.36 "
@@ -30,7 +28,7 @@ import Setup
 chromeOptions = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : "D:\\Downloads\\test"}
 chromeOptions.add_experimental_option("prefs",prefs)
-chromedriver = "chromedriver.exe"
+chromedriver = "C:\\chromedriver.exe"
 browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
 
 
