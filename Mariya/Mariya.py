@@ -16,6 +16,8 @@ import os
 chromeOptions = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : "D:\\Downloads\\test"}
 chromeOptions.add_experimental_option("prefs",prefs)
+
+#¬Õ»Ã¿Õ»≈!!!!!!!!!!!!!!!!!!!!Õ≈ «¿¡€“‹  À»≈Õ“” œ–»ÀŒ∆»“‹ webdriver
 chromedriver = "C:\\chromedriver.exe"
 browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
 
