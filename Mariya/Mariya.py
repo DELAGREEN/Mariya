@@ -8,18 +8,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from time import sleep
 import os
-#headers = {
-#    " Accept": "application/json, text/plain, */*",  
-#    " User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.134 YaBrowser/22.7.0.1842 Yowser/2.5 Safari/537.36 "
-#    " charset=utf-8 "
-#} 
-#url = "https://websbor.gks.ru/online/info"
-#
-#r = requests.get(url, headers)
-#src = r.text
-#print
-#(src)
-
 
 
 
