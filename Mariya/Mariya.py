@@ -1,4 +1,4 @@
-# coding: utf-8
+#coding=1251
 from http.client import responses
 from ssl import Options
 from urllib import response
@@ -21,12 +21,6 @@ chromeOptions.add_experimental_option("prefs",prefs)
 #¬Õ»Ã¿Õ»≈!!!!!!!!!!!!!!!!!!!!Õ≈ «¿¡€“‹  À»≈Õ“” œ–»ÀŒ∆»“‹ webdriver
 chromedriver = "C:\\chromedriver.exe"
 browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
-
-
-
-
-
-
 browser.get('https://websbor.gks.ru/online/info')
 sleep(1)
 
@@ -50,5 +44,4 @@ pass
 if __name__ == '__main__':
 
     
-    #eml = browser.find_element("xpath",'//*[@id="inn"]').send_keys(inn)
     auto_page_pass()
