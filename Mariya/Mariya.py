@@ -14,6 +14,7 @@ import data_inn
 
 #Данный блок служит для создания профиля Гугл хрома
 #В частности он редактирует директорию в которую браузер загружает файлы
+
 chromeOptions = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : "D:\\Downloads\\test"}
 chromeOptions.add_experimental_option("prefs",prefs)
@@ -23,6 +24,7 @@ chromedriver = "C:\\chromedriver.exe"
 browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
 browser.get('https://websbor.gks.ru/online/info')
 sleep(1)
+
 
 #inn = data_inn.inn
 inn = data_inn.data_inject()
