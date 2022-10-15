@@ -26,7 +26,7 @@ def EnterClick(Enter):                              # A - это заглушка, не понят
 
 def windows():
 
-    windows.quit()
+    windows.quit(window)
     pass
 
 window = tk.Tk()                                # Создает окно
