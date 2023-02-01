@@ -5,22 +5,28 @@ import os.path
 from re import I
 from openpyxl.workbook import Workbook as Workbook
 from openpyxl.reader.excel import load_workbook as load_workbook
+from openpyxl.styles.borders import Border, Side
 import os
 from main import auto_page_pass 
+import time
+
+
+start = time.time()
 
 
 path_to_home_dir = os.getcwd()                          #пусть распложения main
 name_to_dir = path_to_home_dir + '\\data'               #путь к папке
 path_to_data = path_to_home_dir + '\\data\\data.xlsx'   #путь к файлу DATA 
-
 test_path = name_to_dir + '\\Итого 01.07.22 (2).xlsx'   #тестовый путь
+sourses = "\\sourses"
+loads = "\\loads"
+loads_dir = sourses + loads
 
 
 def list_dir():
     path_to_dir = os.listdir(name_to_dir)
     #p = str(*path_to_dir)
     print(f"список список файлов, из {name_to_dir} >> {path_to_dir}")
-list_dir()
 
 
 
@@ -103,62 +109,72 @@ def read_dataFile22():
             out_data = data.value
             print(out_data)
             #auto_page_pass(data_list)
-read_dataFile22()
+#read_dataFile22()
 
 
-def append_in_data():
-    wb = Workbook()
+def read_exel_inn(path):
+    list = []
     i = 1
-    y = 1
-    u = 1
-    data = [[i, str(y)],
-           [y, i, u], 
-           [u]]
-
-    for r in data:
-        wb.active.append(r)
-        i,y,u + 1
-        print(data)
-    #wb.active.auto_filter.ref = "A1:C7"
-    #wb.active.add_filter_column(0.)
-    wb.save("data.xlsx")
-    pass
-#append_in_data()
+    book = load_workbook(path, read_only=True)
+    sheet = book.active
+    for row in sheet.iter_rows(min_col = 1,  min_row=i, max_col=1, max_row = sheet.max_row):
+        for data in row:
+            out = data.value
+            if type(out) is int and out not in list:
+                list.append(out)
+            else:
+                break
+    for u in list:
+        auto_page_pass(u)
+    return list
 
 
+def append_in_data2(value):
+    wb = Workbook()
+    ws = wb.active
+    #print(value)
+    for i in value:
+        ws.append(i)
+    wb.save(path_to_data)
+    return(print('append in data >> ok'))
 
 
+def list_in_list(list):
+    '''
+    ОБЕРТКА СПИСОК В СПИСОК list[list[]]
+    '''
+    total_list = []
+    for i in list:
+        u = [i]
+        total_list.append(u)
+    return total_list
+ 
 
-def odd_in():
+def add_style():
     '''
     Работает
     '''
-
-
-    from openpyxl.styles.borders import Border, Side
     #from openpyxl import Workbook
-    
     thin_border = Border(left=Side(style='thin'), 
                          right=Side(style='thin'), 
                          top=Side(style='thin'), 
                          bottom=Side(style='thick'))  #жирная полоса
-    
     wb = Workbook()
     ws = wb.active
-   
-    # property cell.border should be used instead of cell.style.border
     ws.cell(row=3, column=2).border = thin_border
     wb.save('border_test.xlsx')
-    
-odd_in()
+
+
+#(read_exel_inn(path_to_data))
 
 
 
+append_in_data2(list_in_list(read_exel_inn(test_path)))
 
 
-def modify_data(record_data):
+end = time.time()
+
+print('Время выполнения: ',end - start)
+if __name__ == '__data__':
     
     pass
-#def data_inject():
-#    
-#    return inn

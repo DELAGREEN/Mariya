@@ -20,7 +20,7 @@ def AddInn():
 def EnterClick(Enter):                              # A - это заглушка, не понятно мне пока почему, но работает и так =_=
     AddInn()
     pass
-
+                               
 
 
 
