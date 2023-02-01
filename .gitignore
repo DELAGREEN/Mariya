@@ -10,6 +10,7 @@
 data/
 data.txt
 chromedriver.exe
+*.exe
 
 # User-specific files
 *.rsuser
@@ -371,3 +372,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/sourses/chromedriver.exe
