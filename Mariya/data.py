@@ -1,4 +1,3 @@
-#coding=1251
 import os.path
 from openpyxl.workbook import Workbook as Workbook
 from openpyxl.reader.excel import load_workbook as load_workbook
@@ -11,36 +10,36 @@ from config import(path_to_data_dir, path_to_data, final_exel_file, path_to_load
 
 def what_in_folder(path_to_request_dir):
     path_to_dir = os.listdir(path_to_request_dir)
-    #print(f"список список файлов, из {path_to_request_dir} >> {path_to_dir}")
+    #print(f"СЃРїРёСЃРѕРє СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ, РёР· {path_to_request_dir} >> {path_to_dir}")
     return path_to_dir
 
 
 def make_book(path_to_data):
     '''
-    Создаем xlsx файл для записи в него
+    РЎРѕР·РґР°РµРј xlsx С„Р°Р№Р» РґР»СЏ Р·Р°РїРёСЃРё РІ РЅРµРіРѕ
     '''
     wb = Workbook()
-    wb.save(path_to_data)     # сохнаняем с именем лежащей в переменной
+    wb.save(path_to_data)     # СЃРѕС…РЅР°РЅСЏРµРј СЃ РёРјРµРЅРµРј Р»РµР¶Р°С‰РµР№ РІ РїРµСЂРµРјРµРЅРЅРѕР№
 
 
 def make_dirs(path_to_data_dir):
     '''
-    Создаем папки для рабочих 'ДЛЯ УДОБСТВА' процессов
+    РЎРѕР·РґР°РµРј РїР°РїРєРё РґР»СЏ СЂР°Р±РѕС‡РёС… 'Р”Р›РЇ РЈР”РћР‘РЎРўР’Рђ' РїСЂРѕС†РµСЃСЃРѕРІ
     '''
     os.makedirs(path_to_data_dir)
 
 
 def read_dataFile2():
     '''
-    Построчное чтение xlsx
+    РџРѕСЃС‚СЂРѕС‡РЅРѕРµ С‡С‚РµРЅРёРµ xlsx
     '''
     book = load_workbook(path_to_data, read_only=True)
     sheet = book["Sheet"]
     for row in sheet.iter_rows(min_row=1, max_col=1, max_row=999):
         '''
-        nim_row минимальное количество строк 
-        max_col максимальное количество столбцов 
-        max_row максильманое колличество строк
+        nim_row РјРёРЅРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє 
+        max_col РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ 
+        max_row РјР°РєСЃРёР»СЊРјР°РЅРѕРµ РєРѕР»Р»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє
         '''
         for data_list in row:
             #print(data_list)
@@ -51,23 +50,23 @@ def read_dataFile2():
 
 def read_dataFile22():
     '''
-    Построчное чтение xlsx
+    РџРѕСЃС‚СЂРѕС‡РЅРѕРµ С‡С‚РµРЅРёРµ xlsx
     '''
     wb = Workbook()
     book = load_workbook(test_path, read_only=True)
     #sheet = book["Sheet1"]
     #sheet1 = book.active
     #print(sheet1)
-    #print(book.get_sheet_names()) #проверка списка страниц
+    #print(book.get_sheet_names()) #РїСЂРѕРІРµСЂРєР° СЃРїРёСЃРєР° СЃС‚СЂР°РЅРёС†
     i = 2
-    sheet = book.active                                                                 #открываем активную страницу
-    print(sheet.max_row)                                                                #по сути работает как len строк
-    print(sheet.max_column)                                                             #по сути работает как len столбцов
+    sheet = book.active                                                                 #РѕС‚РєСЂС‹РІР°РµРј Р°РєС‚РёРІРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ
+    print(sheet.max_row)                                                                #РїРѕ СЃСѓС‚Рё СЂР°Р±РѕС‚Р°РµС‚ РєР°Рє len СЃС‚СЂРѕРє
+    print(sheet.max_column)                                                             #РїРѕ СЃСѓС‚Рё СЂР°Р±РѕС‚Р°РµС‚ РєР°Рє len СЃС‚РѕР»Р±С†РѕРІ
     for row in sheet.iter_rows(min_col = 1,  min_row=i, max_col=9, max_row=i):
         '''
-        nim_row минимальное количество строк 
-        max_col максимальное количество столбцов 
-        max_row максильманое колличество строк
+        nim_row РјРёРЅРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє 
+        max_col РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ 
+        max_row РјР°РєСЃРёР»СЊРјР°РЅРѕРµ РєРѕР»Р»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє
         '''
         for data in row:
             #print(data_list)
@@ -83,9 +82,9 @@ def read_exel_inn(path, min_and_max_col):
     book = load_workbook(path, read_only=True)
     sheet = book.active
     for row in sheet.iter_rows(min_col = i, max_col=i, min_row=1, max_row = sheet.max_row):
-        #nim_row минимальное количество строк 
-        #max_col максимальное количество столбцов 
-        #max_row максильманое колличество строк
+        #nim_row РјРёРЅРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє 
+        #max_col РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ 
+        #max_row РјР°РєСЃРёР»СЊРјР°РЅРѕРµ РєРѕР»Р»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє
         for data in row:
             out = data.value
             if type(out) is int and out not in list:
@@ -106,9 +105,9 @@ def read_exel(path, min_and_max_col):
     book = load_workbook(path, read_only=True)
     sheet = book.active
     for row in sheet.iter_rows(min_col = 1, max_col=i, min_row=1, max_row = sheet.max_row):
-        #nim_row минимальное количество строк 
-        #max_col максимальное количество столбцов 
-        #max_row максильманое колличество строк
+        #nim_row РјРёРЅРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє 
+        #max_col РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ 
+        #max_row РјР°РєСЃРёР»СЊРјР°РЅРѕРµ РєРѕР»Р»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє
         for data in row:
             out = data.value
             out1 = str(data)
@@ -130,7 +129,7 @@ def append_in_data(list, path_to_file):
 
 def list_in_list(list):
     '''
-    ОБЕРТКА СПИСОК В СПИСОК list[list[]]
+    РћР‘Р•Р РўРљРђ РЎРџРРЎРћРљ Р’ РЎРџРРЎРћРљ list[list[]]
     '''
     total_list = []
     for i in list:
@@ -141,13 +140,13 @@ def list_in_list(list):
 
 def add_style():
     '''
-    Работает
+    Р Р°Р±РѕС‚Р°РµС‚
     '''
     #from openpyxl import Workbook
     thin_border = Border(left=Side(style='thin'), 
                          right=Side(style='thin'), 
                          top=Side(style='thin'), 
-                         bottom=Side(style='thick'))  #жирная полоса
+                         bottom=Side(style='thick'))  #Р¶РёСЂРЅР°СЏ РїРѕР»РѕСЃР°
     wb = Workbook()
     ws = wb.active
     ws.cell(row=3, column=2).border = thin_border
@@ -156,8 +155,8 @@ def add_style():
 
 #(read_exel_inn(path_to_data))
 #append_in_data2(list_in_list(read_exel_inn(test_path)))
-#append_in_data(list_in_list(read_exel_inn(path_to_home_dir + '\\data\\Список дочек для статистики.xlsx', 4)), path_to_home_dir + '\\data\\dataNEW.xlsx')
-#read_exel_inn(path_to_home_dir + '\\data\\Список дочек для статистики.xlsx', 4)
+#append_in_data(list_in_list(read_exel_inn(path_to_home_dir + '\\data\\РЎРїРёСЃРѕРє РґРѕС‡РµРє РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё.xlsx', 4)), path_to_home_dir + '\\data\\dataNEW.xlsx')
+#read_exel_inn(path_to_home_dir + '\\data\\РЎРїРёСЃРѕРє РґРѕС‡РµРє РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё.xlsx', 4)
 
 
 def passage_in_folder_files(path_to_dir):
@@ -201,8 +200,8 @@ def example(list):
         print(f'{index}>> {item}')
 
 def writer_a_report_file(list, path_to_file):
-    #wb = Workbook()                                   #перезаписывает файл
-    wb = load_workbook(path_to_file)                   #Добавляет в файл 
+    #wb = Workbook()                                   #РїРµСЂРµР·Р°РїРёСЃС‹РІР°РµС‚ С„Р°Р№Р»
+    wb = load_workbook(path_to_file)                   #Р”РѕР±Р°РІР»СЏРµС‚ РІ С„Р°Р№Р» 
     ws = wb.active
     #print(value)
     for item in list:
@@ -212,8 +211,8 @@ def writer_a_report_file(list, path_to_file):
     return(print(f'writer_a_report_file >> ok'))
 
 def top_matrix_to_file(path_to_file) -> list:
-    list = ['ИНН', 'Индекс формы', 'Наименование формы', 'Периодичность формы', 'Срок сдачи формы', 
-             'Отчетный период','Комментарий', 'ОКУД', 'Дата актуализации перечня форм']
+    list = ['РРќРќ', 'РРЅРґРµРєСЃ С„РѕСЂРјС‹', 'РќР°РёРјРµРЅРѕРІР°РЅРёРµ С„РѕСЂРјС‹', 'РџРµСЂРёРѕРґРёС‡РЅРѕСЃС‚СЊ С„РѕСЂРјС‹', 'РЎСЂРѕРє СЃРґР°С‡Рё С„РѕСЂРјС‹', 
+             'РћС‚С‡РµС‚РЅС‹Р№ РїРµСЂРёРѕРґ','РљРѕРјРјРµРЅС‚Р°СЂРёР№', 'РћРљРЈР”', 'Р”Р°С‚Р° Р°РєС‚СѓР°Р»РёР·Р°С†РёРё РїРµСЂРµС‡РЅСЏ С„РѕСЂРј']
             
     #wb = Workbook()
     wb = load_workbook(path_to_file)
@@ -227,9 +226,9 @@ def top_matrix_to_file(path_to_file) -> list:
 def matrix_to_file(list) -> list:
     #for item in list:
     #    print(list.index(item) ,item)
-    #принимает только exel_reader 
+    #РїСЂРёРЅРёРјР°РµС‚ С‚РѕР»СЊРєРѕ exel_reader 
     
-        #ЕСЛИ ДЛИННА СПИСКА ЮОЛЬШЕ ЧЕМ СТОЛЬКО ТО, ДЕЛАЕМ ВОТ ЭТО
+        #Р•РЎР›Р Р”Р›РРќРќРђ РЎРџРРЎРљРђ Р®РћР›Р¬РЁР• Р§Р•Рњ РЎРўРћР›Р¬РљРћ РўРћ, Р”Р•Р›РђР•Рњ Р’РћРў Р­РўРћ
  
         if len(list) > 100:
              list1 = [
@@ -292,14 +291,14 @@ def matrix_to_file(list) -> list:
             return(list4)
 
         else:
-            return(print('Выход за диапазон. Обратитесь к Разработчику.'))
+            return(print('Р’С‹С…РѕРґ Р·Р° РґРёР°РїР°Р·РѕРЅ. РћР±СЂР°С‚РёС‚РµСЃСЊ Рє Р Р°Р·СЂР°Р±РѕС‚С‡РёРєСѓ.'))
 
 
 
 
-#writer_a_report_file(matrix_to_file(exel_reader('C:\\Users\\NZXT\\source\\repos\\DELAGREEN\\Mariya\\data\\loads\\Сведения о кодах и формах (1).xlsx')), test) 
-# Прикол какой, лист в лист нужно поменять и сделать такой как матрица которую я составил
-#example(exel_reader('C:\\Users\\NZXT\\source\\repos\\DELAGREEN\\Mariya\\data\\loads\\Сведения о кодах и формах (1).xlsx'))
+#writer_a_report_file(matrix_to_file(exel_reader('C:\\Users\\NZXT\\source\\repos\\DELAGREEN\\Mariya\\data\\loads\\РЎРІРµРґРµРЅРёСЏ Рѕ РєРѕРґР°С… Рё С„РѕСЂРјР°С… (1).xlsx')), test) 
+# РџСЂРёРєРѕР» РєР°РєРѕР№, Р»РёСЃС‚ РІ Р»РёСЃС‚ РЅСѓР¶РЅРѕ РїРѕРјРµРЅСЏС‚СЊ Рё СЃРґРµР»Р°С‚СЊ С‚Р°РєРѕР№ РєР°Рє РјР°С‚СЂРёС†Р° РєРѕС‚РѕСЂСѓСЋ СЏ СЃРѕСЃС‚Р°РІРёР»
+#example(exel_reader('C:\\Users\\NZXT\\source\\repos\\DELAGREEN\\Mariya\\data\\loads\\РЎРІРµРґРµРЅРёСЏ Рѕ РєРѕРґР°С… Рё С„РѕСЂРјР°С… (1).xlsx'))
 
 
 def final_define_write_a_report_file(path_to_dir, path_to_file):
@@ -319,23 +318,23 @@ def final_define_write_a_report_file(path_to_dir, path_to_file):
 #example(exel_reader(test))
 
 ''' 
-Данный блок проверяет создан ли файл базы данных
-если нет, то просто создает его
-таким образом мы пытаемся обойти ощибки со стороны 
-обработки программой
+Р”Р°РЅРЅС‹Р№ Р±Р»РѕРє РїСЂРѕРІРµСЂСЏРµС‚ СЃРѕР·РґР°РЅ Р»Рё С„Р°Р№Р» Р±Р°Р·С‹ РґР°РЅРЅС‹С…
+РµСЃР»Рё РЅРµС‚, С‚Рѕ РїСЂРѕСЃС‚Рѕ СЃРѕР·РґР°РµС‚ РµРіРѕ
+С‚Р°РєРёРј РѕР±СЂР°Р·РѕРј РјС‹ РїС‹С‚Р°РµРјСЃСЏ РѕР±РѕР№С‚Рё РѕС‰РёР±РєРё СЃРѕ СЃС‚РѕСЂРѕРЅС‹ 
+РѕР±СЂР°Р±РѕС‚РєРё РїСЂРѕРіСЂР°РјРјРѕР№
 '''
 '''
-Созадаем дерикторию
+РЎРѕР·Р°РґР°РµРј РґРµСЂРёРєС‚РѕСЂРёСЋ
 '''
-if not os.path.exists(path_to_data_dir):             # Проверяем есть ли ДИРЕКТОРИЯ с таким именем, если нет, создает
+if not os.path.exists(path_to_data_dir):             # РџСЂРѕРІРµСЂСЏРµРј РµСЃС‚СЊ Р»Рё Р”РР Р•РљРўРћР РРЇ СЃ С‚Р°РєРёРј РёРјРµРЅРµРј, РµСЃР»Рё РЅРµС‚, СЃРѕР·РґР°РµС‚
     make_dirs(path_to_data_dir)
 '''
-Создаем базу данных в xlsx формате
+РЎРѕР·РґР°РµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С… РІ xlsx С„РѕСЂРјР°С‚Рµ
 '''
-if not os.path.exists(path_to_data):            # проверяет существование пути, если нет, вызываем функцию создания
+if not os.path.exists(path_to_data):            # РїСЂРѕРІРµСЂСЏРµС‚ СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ РїСѓС‚Рё, РµСЃР»Рё РЅРµС‚, РІС‹Р·С‹РІР°РµРј С„СѓРЅРєС†РёСЋ СЃРѕР·РґР°РЅРёСЏ
     make_book(path_to_data)                             
-                                                # Сюда нужно еще написать вызов функции которая вызывает окно пользователя и говорит ему
-                                                # что база пустая и необходимо ее пополнить INN для прохождения по ней
+                                                # РЎСЋРґР° РЅСѓР¶РЅРѕ РµС‰Рµ РЅР°РїРёСЃР°С‚СЊ РІС‹Р·РѕРІ С„СѓРЅРєС†РёРё РєРѕС‚РѕСЂР°СЏ РІС‹Р·С‹РІР°РµС‚ РѕРєРЅРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Рё РіРѕРІРѕСЂРёС‚ РµРјСѓ
+                                                # С‡С‚Рѕ Р±Р°Р·Р° РїСѓСЃС‚Р°СЏ Рё РЅРµРѕР±С…РѕРґРёРјРѕ РµРµ РїРѕРїРѕР»РЅРёС‚СЊ INN РґР»СЏ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ РїРѕ РЅРµР№
 if not os.path.exists(final_exel_file):
     make_book(final_exel_file)
     top_matrix_to_file(final_exel_file)

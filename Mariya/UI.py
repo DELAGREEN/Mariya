@@ -1,5 +1,3 @@
-#coding=1251
-
 ################################################################################
 ## Form generated from reading UI file 'untitled.ui'
 ##
@@ -38,7 +36,7 @@ class Ui_Dialog(object):
         Dialog.setFocusPolicy(Qt.NoFocus)
         Dialog.setContextMenuPolicy(Qt.NoContextMenu)
         Dialog.setAcceptDrops(False)
-        Dialog.setWindowTitle(u"Мария (Формирование отчета ФСГС)")
+        Dialog.setWindowTitle(u"РњР°СЂРёСЏ (Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ РѕС‚С‡РµС‚Р° Р¤РЎР“РЎ)")
         icon = QIcon()
         iconThemeName = u"applications-system"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -54,19 +52,19 @@ class Ui_Dialog(object):
         self.pushButton = QPushButton(Dialog)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(130, 10, 241, 41))
-        self.pushButton.clicked.connect(self.button_clicked)                    #Кликабельность кнопки
+        self.pushButton.clicked.connect(self.button_clicked)                    #РљР»РёРєР°Р±РµР»СЊРЅРѕСЃС‚СЊ РєРЅРѕРїРєРё
         
         self.pushButton_2 = QPushButton(Dialog)
         self.pushButton_2.setObjectName(u"pushButton_2")
         self.pushButton_2.setEnabled(True)
         self.pushButton_2.setGeometry(QRect(130, 60, 241, 41))
-        self.pushButton_2.clicked.connect(self.button_2_clicked)                #Кликабельность кнопки
+        self.pushButton_2.clicked.connect(self.button_2_clicked)                #РљР»РёРєР°Р±РµР»СЊРЅРѕСЃС‚СЊ РєРЅРѕРїРєРё
 
         self.progressBar = QProgressBar(Dialog)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setGeometry(QRect(10, 110, 361, 23))
         self.progressBar.setMaximum(100)
-        self.progressBar.setValue(10)                                           #Колл % на которое заполнен прогрессбар  
+        self.progressBar.setValue(10)                                           #РљРѕР»Р» % РЅР° РєРѕС‚РѕСЂРѕРµ Р·Р°РїРѕР»РЅРµРЅ РїСЂРѕРіСЂРµСЃСЃР±Р°СЂ  
         self.progressBar.setAlignment(Qt.AlignBottom|Qt.AlignHCenter)
         self.progressBar.setTextVisible(True)
         self.progressBar.setInvertedAppearance(False)
@@ -93,10 +91,10 @@ class Ui_Dialog(object):
 
     def button_clicked(self):
         read_exel_inn(path_to_data, 1)
-        print('Тык1')
+        print('РўС‹Рє1')
     def button_2_clicked(self):
         final_define_write_a_report_file(path_to_loads_dir, final_exel_file)
-        print('Тык2')
+        print('РўС‹Рє2')
     #def progress_bar(self):
  
         
@@ -106,8 +104,8 @@ class Ui_Dialog(object):
     # setupUi
 
     def retranslateUi(self, Dialog):
-        self.pushButton.setText(QCoreApplication.translate("Dialog", u"Загрузка файлов с сайта ФСГС", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Dialog", u"Создание финального отчета", None))
+        self.pushButton.setText(QCoreApplication.translate("Dialog", u"Р—Р°РіСЂСѓР·РєР° С„Р°Р№Р»РѕРІ СЃ СЃР°Р№С‚Р° Р¤РЎР“РЎ", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Dialog", u"РЎРѕР·РґР°РЅРёРµ С„РёРЅР°Р»СЊРЅРѕРіРѕ РѕС‚С‡РµС‚Р°", None))
         
         self.progressBar.setFormat(QCoreApplication.translate("Dialog", u"50", None))
 

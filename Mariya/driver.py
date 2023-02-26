@@ -1,4 +1,3 @@
-#coding=1251
 from selenium import webdriver
 from time import sleep
 from selenium import webdriver
@@ -8,7 +7,7 @@ from config import (path_to_home_dir, path_to_loads_dir, time_sleep)
 def auto_page_pass(inn):
  chrome_options = webdriver.ChromeOptions()
  '''
- Драйвер для управления браузером.
+ Р”СЂР°Р№РІРµСЂ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ Р±СЂР°СѓР·РµСЂРѕРј.
  '''
  chromedriver = path_to_home_dir + "\\sourses\\chromedriver.exe"      
  prefs =  {"profile.default_content_settings.popups": 0,
@@ -19,12 +18,12 @@ def auto_page_pass(inn):
  browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=chrome_options)
  browser.get('https://websbor.gks.ru/online/info')
  sleep(time_sleep)
- #для поиска элемента в примере используется XPath (F12 в браузере, поиск нужного элемента, ПКМ - Copy - XPath)
- # ввести в поле "Телефон и email" 123
+ #РґР»СЏ РїРѕРёСЃРєР° СЌР»РµРјРµРЅС‚Р° РІ РїСЂРёРјРµСЂРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ XPath (F12 РІ Р±СЂР°СѓР·РµСЂРµ, РїРѕРёСЃРє РЅСѓР¶РЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°, РџРљРњ - Copy - XPath)
+ # РІРІРµСЃС‚Рё РІ РїРѕР»Рµ "РўРµР»РµС„РѕРЅ Рё email" 123
  print(f'Open is {inn}')
  browser.find_element("xpath",'//*[@id="inn"]').send_keys(inn)
  sleep(time_sleep)
- #нажатие кнопки 1
+ #РЅР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё 1
  browser.find_element("xpath",'//*[@id="body"]/websbor-statistics-codes/websbor-simple-background/div/article/div/div[1]/div/form/div[3]/button/span').click()
  sleep(time_sleep)
  browser.find_element("xpath",'//*[@id="body"]/websbor-statistics-codes/websbor-simple-background/div/article/div/div[2]/div/button/span').click()

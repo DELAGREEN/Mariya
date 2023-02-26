@@ -1,4 +1,3 @@
-#coding=1251
 from time import sleep
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -35,7 +34,7 @@ class App(QMainWindow):
 
 end = time.time()
 total_time = (end - start)/60
-print(f'Время выполнения: {total_time} мин.')
+print(f'Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ: {total_time} РјРёРЅ.')
 
 if __name__ == '__main__':
 	
