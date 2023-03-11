@@ -6,12 +6,9 @@ from report_module import append_in_data, writer_a_report_file
 import time
 
 def report(list:list):
-	#list_reports = request()
 	for orgnization in list:	
 		print(orgnization)
 		writer_a_report_file(orgnization)
-#report()
-
 
 
 def get_id(inn)->dict[str, int]:
@@ -83,13 +80,4 @@ def report_generation(data:dict, inn)->None:
 		list1.append(out_data)
 	report(list1)
 	return None
-
-
-def request():
-	list_inn = read_exel_inn()
-	for item in list_inn:
-		for inn in item:
-			report_generation(get_organization(get_id(inn)), inn)
-			time.sleep(3)
-request()
 

@@ -10,12 +10,8 @@ from requests_module import get_id, get_organization, report_generation
 
 
 def progress_bar(steps: int, max_lenght: int = 50) -> None:
-	
 	step_size = 50 / steps
-
 	#step_size = 100 / max_lenght
-
-
 	for i in range(1, steps + 1):
 		print(f'\r{int(i * step_size)}%', end='')
 		p = i * step_size
@@ -23,13 +19,22 @@ def progress_bar(steps: int, max_lenght: int = 50) -> None:
 	print('')
 	return p 
 
-#progress_bar(100)
 
-#def main_Function():
-#	try:
-#	except Exception as ex:
-#		print(f'Ошибка: {ex}')
-#
+def request():
+	list_inn = read_exel_inn()
+	for item in list_inn:
+		for inn in item:
+			report_generation(get_organization(get_id(inn)), inn)
+			time.sleep(3)
+
+
+def main_Function():
+	try:
+		request()
+	except Exception as ex:
+		print(f'Ошибка: {ex}')
+main_Function()
+
 
 
 class App(QMainWindow):
