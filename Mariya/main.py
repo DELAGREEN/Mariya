@@ -4,8 +4,7 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_module import Ui_Dialog
 import time 
-from report_module import read_exel_inn, writer_a_report_file, append_in_data, read_exel
-from config_module import path_to_data, path_to_final_exel_file
+from report_module import read_exel_inn
 from requests_module import get_id, get_organization, report_generation
 
 
@@ -33,7 +32,7 @@ def main_Function():
 		request()
 	except Exception as ex:
 		print(f'Ошибка: {ex}')
-main_Function()
+
 
 
 
@@ -58,7 +57,3 @@ if __name__ == '__main__':
 
 
 	sys.exit(app.exec())	
-
-
-
-

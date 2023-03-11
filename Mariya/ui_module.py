@@ -19,6 +19,7 @@ from PySide6.QtWidgets import (QApplication, QDialog, QProgressBar, QPushButton,
     QSizePolicy, QWidget)
 
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
@@ -27,11 +28,11 @@ class Ui_Dialog(object):
         Dialog.resize(380, 100)
         Dialog.setMinimumSize(QSize(380, 100))
         Dialog.setMaximumSize(QSize(380, 100))
-        Dialog.setCursor(QCursor(Qt.ArrowCursor))
+        Dialog.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         Dialog.setMouseTracking(True)
         Dialog.setTabletTracking(False)
-        Dialog.setFocusPolicy(Qt.NoFocus)
-        Dialog.setContextMenuPolicy(Qt.NoContextMenu)
+        Dialog.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        Dialog.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         Dialog.setAcceptDrops(False)
         Dialog.setWindowTitle(u"\u041c\u0430\u0440\u0438\u044f(\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043e\u0442\u0447\u0435\u0442\u0430 \u043f\u043e \u0444\u043e\u0440\u043c\u0430\u043c \u0424\u0421\u0413\u0421)")
         icon = QIcon()
@@ -39,11 +40,11 @@ class Ui_Dialog(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
-            icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         Dialog.setWindowIcon(icon)
-        Dialog.setLayoutDirection(Qt.LeftToRight)
+        Dialog.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         Dialog.setAutoFillBackground(False)
-        Dialog.setInputMethodHints(Qt.ImhNone)
+        Dialog.setInputMethodHints(Qt.InputMethodHint.ImhNone)
         self.pushButton = QPushButton(Dialog)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setEnabled(True)
@@ -54,23 +55,28 @@ class Ui_Dialog(object):
         self.progressBar.setGeometry(QRect(0, 70, 381, 23))
         self.progressBar.setMaximum(100)
         self.progressBar.setValue(20)                                   # % значения заполнения
-        self.progressBar.setAlignment(Qt.AlignBottom|Qt.AlignHCenter)
+        self.progressBar.setAlignment(Qt.AlignmentFlag.AlignBottom|Qt.AlignmentFlag.AlignHCenter)
         self.progressBar.setTextVisible(True)
         self.progressBar.setInvertedAppearance(False)
-        self.progressBar.setTextDirection(QProgressBar.TopToBottom)
+        self.progressBar.setTextDirection(QProgressBar.Direction.TopToBottom)
         self.retranslateUi(Dialog)
         QMetaObject.connectSlotsByName(Dialog)
     # setupUi
+
+
     def button_clicked(self):
-        #read_exel_inn(path_to_data, 1)
+        from main import main_Function
+        main_Function()
         print('Тык1')
+
+
     #def button_2_clicked(self):
     #    #final_define_write_a_report_file(path_to_loads_dir, final_exel_file)
     #    print('Тык2')
     ##def progress_bar(self):
     def retranslateUi(self, Dialog):
-        self.pushButton.setText(QCoreApplication.translate("Dialog", u"\u0412\u044b\u0433\u0440\u0443\u0437\u043a\u0430 \u0438 \u0441\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043e\u0442\u0447\u0435\u0442\u0430 \u0441 \u0441\u0430\u0439\u0442\u0430 \u0424\u0421\u0413\u0421 (exel)", None))
-        self.progressBar.setFormat(QCoreApplication.translate("Dialog", u"%p%", None))
+        self.pushButton.setText(QCoreApplication.translate("Dialog", u"\u0412\u044b\u0433\u0440\u0443\u0437\u043a\u0430 \u0438 \u0441\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043e\u0442\u0447\u0435\u0442\u0430 \u0441 \u0441\u0430\u0439\u0442\u0430 \u0424\u0421\u0413\u0421 (exel)", None)) # type: ignore 
+        self.progressBar.setFormat(QCoreApplication.translate("Dialog", u"%p%", None)) # type: ignore 
         pass
     # retranslateUi
     
