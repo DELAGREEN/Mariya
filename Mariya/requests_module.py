@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
 import requests
 from config_module import current_day, current_time
+from report_module import read_exel_inn
+from report_module import append_in_data, writer_a_report_file
+import time
+
+def report(list:list):
+	#list_reports = request()
+	for orgnization in list:	
+		print(orgnization)
+		writer_a_report_file(orgnization)
+#report()
 
 
-def get_id(inn:int)->dict[str, int]:
+
+def get_id(inn)->dict[str, int]:
 	'''
 	с помощью данной функции будем получать ID  организации
 	для обращения к серверу напрямую
@@ -43,8 +54,7 @@ def get_organization(data:dict)->dict:
 	return response
 
 
-def report_generation(data:dict, inn:int)->list:
-	from report_module import append_in_data, writer_a_report_file
+def report_generation(data:dict, inn)->None:
 	list1 = []
 	for item in data:
 		id = item['id']
@@ -70,5 +80,16 @@ def report_generation(data:dict, inn:int)->list:
 		periodNum = item['periodNum']
 		periodYear = item['periodYear']
 		out_data = [inn, index, name, form_period, end_time, reported_period, comment, okud]
-		writer_a_report_file(out_data)
-	return list
+		list1.append(out_data)
+	report(list1)
+	return None
+
+
+def request():
+	list_inn = read_exel_inn()
+	for item in list_inn:
+		for inn in item:
+			report_generation(get_organization(get_id(inn)), inn)
+			time.sleep(3)
+request()
+

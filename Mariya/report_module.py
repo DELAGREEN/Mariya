@@ -5,8 +5,7 @@ from openpyxl.reader.excel import load_workbook as load_workbook
 from openpyxl.styles.borders import Border, Side
 import os
 import time
-from config_module import(path_to_data_dir, path_to_data, path_to_final_exel_file, path_to_loads_dir)
-from requests_module import report_generation, get_organization, get_id 
+from config_module import(path_to_data_dir, path_to_data, path_to_final_exel_file, path_to_loads_dir) 
 
 def what_in_folder(path_to_request_dir):
     path_to_dir = os.listdir(path_to_request_dir)
@@ -29,29 +28,7 @@ def make_dirs(path_to_data_dir):
     os.makedirs(path_to_data_dir)
 
 
-def read_dataFile2():
-    '''
-    Построчное чтение xlsx
-    '''
-    book = load_workbook(path_to_data, read_only=True)
-    sheet = book["Sheet"]
-    for row in sheet.iter_rows(min_row=1, max_col=1, max_row=999):
-        '''
-        nim_row минимальное количество строк 
-        max_col максимальное количество столбцов 
-        max_row максильманое колличество строк
-        '''
-        for data_list in row:
-            #print(data_list)
-            data_list = data_list.value
-            print(data_list)
-            #auto_page_pass(data_list)
-#read_dataFile2()
-
-
-#read_exel_inn(path_to_home_dir + '\\data\\dataNEW.xlsx', 1)
-
-def read_exel(path):
+def read_exel(path = path_to_data):
     list = []
     book = load_workbook(path, read_only=True)
     sheet = book.active
@@ -138,20 +115,8 @@ def example(list):
     for item in list:
         index = list.index(item)
         print(f'{index}>> {item}')
-'''
-def writer_a_report_file(list, path_to_file = path_to_final_exel_file):
-    #wb = Workbook()                                   #перезаписывает файл
-    wb = load_workbook(path_to_file)                   #Добавляет в файл 
-    ws = wb.active
-    ws.append(list)
-    wb.save(path_to_file)
-    wb.close
-    return(print(f'writer_a_report_file >> ok'))
-#writer_a_report_file(['Проверка', 'Test'])
-'''
 
-
-def top_matrix_to_file(path_to_file) -> list:
+def top_matrix_to_file(path_to_file) -> None:
     list = ['ИНН', 'Индекс формы', 'Наименование формы', 'Периодичность формы', 'Срок сдачи формы', 
              'Отчетный период','Комментарий', 'ОКУД', 'Дата актуализации перечня форм']
             
@@ -161,20 +126,8 @@ def top_matrix_to_file(path_to_file) -> list:
     ws.append(list)
     wb.save(path_to_file)
     wb.close
-
+    return None
 #top_matrix_to_file(test)
-
-
-def final_define_write_a_report_file(path_to_dir, path_to_file):
-    folder = what_in_folder(path_to_dir)
-    i = '\\'
-    for item in folder:
-        print(item)
-        print(path_to_dir + i + item)
-        writer_a_report_file(exel_reader(path_to_dir + i + item), path_to_file)
-    print('Complite')
-    
-
 
 
 def read_exel_inn(path_to_data = path_to_data):
@@ -189,13 +142,9 @@ def read_exel_inn(path_to_data = path_to_data):
             out = data.value
             if type(out) is int and out not in list_inn:
                 list_inn.append(out)
-            else:
-                break
-    #print(list)
-    #auto_page_pass().browser.quit()
-    print(list_inn)
     yield list_inn
-#read_exel_inn()
+
+
 
 ''' 
 Данный блок проверяет создан ли файл базы данных
@@ -221,12 +170,10 @@ if not os.path.exists(path_to_final_exel_file):
 
 
 def writer_a_report_file(list, path_to_file = path_to_final_exel_file):
-    #wb = Workbook()                                   #перезаписывает файл
-    print(f'EQY>>>> {list}')
-    wb = load_workbook(path_to_file)                   #Добавляет в файл 
+    wb = load_workbook(path_to_file)
     ws = wb.active
+    #for row in list:
     ws.append(list)
     wb.save(path_to_file)
     wb.close
     return(print(f'writer_a_report_file >> ok'))
-#writer_a_report_file(['Проверка', 'Test'])
