@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 from config_module import current_day, current_time
-from report_module import read_exel_inn
-from report_module import append_in_data, writer_a_report_file
-import time
+from report_module import writer_a_report_file
 
 def report(list:list):
 	for orgnization in list:	

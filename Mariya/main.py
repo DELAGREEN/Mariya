@@ -4,7 +4,7 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_module import Ui_Dialog
 import time 
-from report_module import read_exel_inn
+from report_module import read_exel_inn, checking_existence_files
 from requests_module import get_id, get_organization, report_generation
 
 
@@ -45,6 +45,8 @@ class App(QMainWindow):
 
 if __name__ == '__main__':
 	start = time.time()
+
+	checking_existence_files()
 
 	app = QApplication(sys.argv)
 	window = App()

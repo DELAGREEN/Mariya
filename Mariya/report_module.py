@@ -1,23 +1,21 @@
 # -*- coding: utf-8 -*-
-import os.path
 from openpyxl.workbook import Workbook as Workbook
 from openpyxl.reader.excel import load_workbook as load_workbook
-from openpyxl.styles.borders import Border, Side
+from openpyxl.styles import Border, Side, PatternFill, Font, GradientFill, Alignment
 import os
-import time
 from config_module import(path_to_data_dir, path_to_data, path_to_final_exel_file, path_to_loads_dir) 
 
-def what_in_folder(path_to_request_dir):
-    path_to_dir = os.listdir(path_to_request_dir)
-    #print(f"список список файлов, из {path_to_request_dir} >> {path_to_dir}")
-    return path_to_dir
+#def what_in_folder(path_to_request_dir):
+#    path_to_dir = os.listdir(path_to_request_dir)
+#    #print(f"список список файлов, из {path_to_request_dir} >> {path_to_dir}")
+#    return path_to_dir
 
 
 def make_book(path_to_data):
     '''
     Создаем xlsx файл для записи в него
     '''
-    wb = Workbook()
+    wb = Workbook()           #Создает exel file
     wb.save(path_to_data)     # сохнаняем с именем лежащей в переменной
 
 
@@ -28,43 +26,43 @@ def make_dirs(path_to_data_dir):
     os.makedirs(path_to_data_dir)
 
 
-def read_exel(path = path_to_data):
-    list = []
-    book = load_workbook(path, read_only=True)
-    sheet = book.active
-    for row in sheet.iter_rows(min_col = 1, max_col=1, min_row=1, max_row = sheet.max_row):
-        #nim_row минимальное количество строк 
-        #max_col максимальное количество столбцов 
-        #max_row максильманое колличество строк
-        for data in row:
-            out = data.value
-            if out not in list:
-                list.append(out)
-            else:
-                break
-    print(list)
-    return list
-#read_exel(path_to_data)
+#def read_exel(path = path_to_data):
+#    list = []
+#    book = load_workbook(path, read_only=True)
+#    sheet = book.active
+#    for row in sheet.iter_rows(min_col = 1, max_col=1, min_row=1, max_row = sheet.max_row):
+#        #nim_row минимальное количество строк 
+#        #max_col максимальное количество столбцов 
+#        #max_row максильманое колличество строк
+#        for data in row:
+#            out = data.value
+#            if out not in list:
+#                list.append(out)
+#            else:
+#                break
+#    print(list)
+#    return list
+##read_exel(path_to_data)
 
-def append_in_data(list, path_to_file = path_to_final_exel_file):
-    wb = Workbook()
-    ws = wb.active
-    #print(value)
-    for item in list:
-        ws.append(item)
-    wb.save(path_to_file)
-    return(print('append in data >> ok'))
+#def append_in_data(list, path_to_file = path_to_final_exel_file):
+#    wb = Workbook()
+#    ws = wb.active
+#    #print(value)
+#    for item in list:
+#        ws.append(item)
+#    wb.save(path_to_file)
+#    return(print('append in data >> ok'))
 
 
-def list_in_list(list):
-    '''
-    ОБЕРТКА СПИСОК В СПИСОК list[list[]]
-    '''
-    total_list = []
-    for i in list:
-        u = [i]
-        total_list.append(u)
-    return total_list
+#def list_in_list(list):
+#    '''
+#    ОБЕРТКА СПИСОК В СПИСОК list[list[]]
+#    '''
+#    total_list = []
+#    for i in list:
+#        u = [i]
+#        total_list.append(u)
+#    return total_list
  
 
 def add_style():
@@ -83,32 +81,32 @@ def add_style():
 
 
 
-def passage_in_folder_files(path_to_dir):
-    folder = what_in_folder(path_to_dir)
-    i = '\\'
-    data = read_exel(path_to_dir + i + folder[0], 11)
-    for item in data:
-        print(data.index(item), item)
+#def passage_in_folder_files(path_to_dir):
+#    folder = what_in_folder(path_to_dir)
+#    i = '\\'
+#    data = read_exel(path_to_dir + i + folder[0], 11)
+#    for item in data:
+#        print(data.index(item), item)
+#
+##passage_in_folder_files(loads_dir)
 
-#passage_in_folder_files(loads_dir)
 
 
-
-def exel_reader(path_to_file) -> list:
-    book = load_workbook(path_to_file, read_only=True)
-    sheet = book.active
-    ws = sheet['A1' : 'K16']
-    list = []
-    for row in ws:
-        for cell in row:
-                out = cell.value
-                if out is not None:
-                    list.append(out)
-                    #print(list.index(out), out)
-                else:
-                    break
-
-    yield list
+#def exel_reader(path_to_file) -> list:
+#    book = load_workbook(path_to_file, read_only=True)
+#    sheet = book.active
+#    ws = sheet['A1' : 'K16']
+#    list = []
+#    for row in ws:
+#        for cell in row:
+#                out = cell.value
+#                if out is not None:
+#                    list.append(out)
+#                    #print(list.index(out), out)
+#                else:
+#                    break
+#
+#    yield list
  
 
 def example(list):
@@ -145,28 +143,29 @@ def read_exel_inn(path_to_data = path_to_data):
     yield list_inn
 
 
-
-''' 
-Данный блок проверяет создан ли файл базы данных
-если нет, то просто создает его
-таким образом мы пытаемся обойти ощибки со стороны 
-обработки программой
-'''
-'''
-Созадаем дерикторию
-'''
-if not os.path.exists(path_to_data_dir):             # Проверяем есть ли ДИРЕКТОРИЯ с таким именем, если нет, создает
-    make_dirs(path_to_data_dir)
-'''
-Создаем базу данных в xlsx формате
-'''
-if not os.path.exists(path_to_data):                # проверяет существование пути, если нет, вызываем функцию создания
-    make_book(path_to_data)                             
-                                                    # Сюда нужно еще написать вызов функции которая вызывает окно пользователя и говорит ему
-                                                    # что база пустая и необходимо ее пополнить INN для прохождения по ней
-if not os.path.exists(path_to_final_exel_file):
-    make_book(path_to_final_exel_file)
-    top_matrix_to_file(path_to_final_exel_file)
+def checking_existence_files():
+    ''' 
+    Данный блок проверяет создан ли файл базы данных
+    если нет, то просто создает его
+    таким образом мы пытаемся обойти ощибки со стороны 
+    обработки программой
+    '''
+    '''
+    Созадаем дерикторию
+    '''
+    if not os.path.exists(path_to_data_dir):             # Проверяем есть ли ДИРЕКТОРИЯ с таким именем, если нет, создает
+        make_dirs(path_to_data_dir)
+    '''
+    Создаем базу данных в xlsx формате
+    '''
+    if not os.path.exists(path_to_data):                # проверяет существование пути, если нет, вызываем функцию создания
+        make_book(path_to_data)                             
+                                                        # Сюда нужно еще написать вызов функции которая вызывает окно пользователя и говорит ему
+                                                        # что база пустая и необходимо ее пополнить INN для прохождения по ней
+    if not os.path.exists(path_to_final_exel_file):
+        make_book(path_to_final_exel_file)
+        top_matrix_to_file(path_to_final_exel_file)
+    return None
 
 
 def writer_a_report_file(list, path_to_file = path_to_final_exel_file):
@@ -177,3 +176,24 @@ def writer_a_report_file(list, path_to_file = path_to_final_exel_file):
     wb.save(path_to_file)
     wb.close
     return(print(f'writer_a_report_file >> ok'))
+
+
+def example(path_to_file = path_to_final_exel_file):
+    # Импортируйте библиотеку `openpyxl`
+    # Создайте новую рабочую книгу Excel
+    wb = load_workbook(path_to_file)
+    # Активируйте лист в рабочей книге (который на данный момент будет единственным листом)
+    ws = wb.active
+    #print(sheet.max_row) 
+    #for row in sheet.iter_rows(min_col = 1, max_col=10, min_row=1, max_row = sheet.max_row):
+    #    print(row)
+    #print(sheet.row)
+    ws.row_dimensions[1].height = 40    #размер строки 
+    ws.column_dimensions['B'].width = 30    #размер колонки
+    ws['B1'].alignment = Alignment(horizontal="center", vertical="center")    #Текст по центру
+
+    wb.save(path_to_file)
+    wb.close
+
+
+#example()
