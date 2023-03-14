@@ -109,7 +109,7 @@ def add_style():
 #    yield list
  
 
-def example(list):
+def example1(list):
     for item in list:
         index = list.index(item)
         print(f'{index}>> {item}')
@@ -184,13 +184,43 @@ def example(path_to_file = path_to_final_exel_file):
     wb = load_workbook(path_to_file)
     # Активируйте лист в рабочей книге (который на данный момент будет единственным листом)
     ws = wb.active
-    #print(sheet.max_row) 
+    print(ws.max_row)
+    #print(ws.max_col) 
     #for row in sheet.iter_rows(min_col = 1, max_col=10, min_row=1, max_row = sheet.max_row):
     #    print(row)
     #print(sheet.row)
-    ws.row_dimensions[1].height = 40    #размер строки 
-    ws.column_dimensions['B'].width = 30    #размер колонки
-    ws['B1'].alignment = Alignment(horizontal="center", vertical="center")    #Текст по центру
+
+    ws.column_dimensions['A'].width = 15    #размер колонки
+    ws.column_dimensions['B'].width = 30    
+    ws.column_dimensions['C'].width = 40    
+    ws.column_dimensions['D'].width = 15    
+    ws.column_dimensions['E'].width = 40    
+    ws.column_dimensions['F'].width = 15     
+    ws.column_dimensions['G'].width = 60    
+    ws.column_dimensions['H'].width = 15    
+    ws.column_dimensions['I'].width = 15    
+    i = 2
+
+    while i <= ws.max_row:                  #max_row - максимальное колличество скрок
+        ws[f'A{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    #Выравнивание текста по центру и перенос текста True
+        ws[f'B{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
+        ws[f'C{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
+        ws[f'D{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
+        ws[f'E{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
+        ws[f'F{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
+        ws[f'G{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
+        ws[f'H{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
+        ws[f'I{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    
+        u = len(ws[f'G{i}'].value)
+        level = int(u/3)
+        if level < 60:
+            level = 60
+        print(level)
+        ws.row_dimensions[i].height = level    #размер строки    
+        i+=1
+        #print(i)
+
 
     wb.save(path_to_file)
     wb.close
