@@ -66,7 +66,9 @@ class Ui_Dialog(object):
 
     def button_clicked(self):
         from main import main_Function
+        from report_module import formater_to_exel
         main_Function()
+        formater_to_exel()
         print('Тык1')
 
 

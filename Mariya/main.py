@@ -4,7 +4,7 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_module import Ui_Dialog
 import time 
-from report_module import read_exel_inn, checking_existence_files
+from report_module import read_exel_inn, checking_existence_files, formater_to_exel
 from requests_module import get_id, get_organization, report_generation
 
 
@@ -24,7 +24,7 @@ def request():
 	for item in list_inn:
 		for inn in item:
 			report_generation(get_organization(get_id(inn)), inn)
-			time.sleep(3)
+			time.sleep(4)
 
 
 def main_Function():
@@ -32,8 +32,6 @@ def main_Function():
 		request()
 	except Exception as ex:
 		print(f'Ошибка: {ex}')
-
-
 
 
 class App(QMainWindow):

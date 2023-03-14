@@ -78,4 +78,3 @@ def report_generation(data:dict, inn)->None:
 		list1.append(out_data)
 	report(list1)
 	return None
-

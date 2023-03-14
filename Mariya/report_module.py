@@ -178,7 +178,7 @@ def writer_a_report_file(list, path_to_file = path_to_final_exel_file):
     return(print(f'writer_a_report_file >> ok'))
 
 
-def example(path_to_file = path_to_final_exel_file):
+def formater_to_exel(path_to_file = path_to_final_exel_file):
     # Импортируйте библиотеку `openpyxl`
     # Создайте новую рабочую книгу Excel
     wb = load_workbook(path_to_file)
@@ -190,7 +190,7 @@ def example(path_to_file = path_to_final_exel_file):
     #    print(row)
     #print(sheet.row)
 
-    ws.column_dimensions['A'].width = 15    #размер колонки
+    ws.column_dimensions['A'].width = 12    #размер колонки
     ws.column_dimensions['B'].width = 30    
     ws.column_dimensions['C'].width = 40    
     ws.column_dimensions['D'].width = 15    
@@ -199,7 +199,7 @@ def example(path_to_file = path_to_final_exel_file):
     ws.column_dimensions['G'].width = 60    
     ws.column_dimensions['H'].width = 15    
     ws.column_dimensions['I'].width = 15    
-    i = 2
+    i = 1
 
     while i <= ws.max_row:                  #max_row - максимальное колличество скрок
         ws[f'A{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    #Выравнивание текста по центру и перенос текста True
@@ -224,6 +224,3 @@ def example(path_to_file = path_to_final_exel_file):
 
     wb.save(path_to_file)
     wb.close
-
-
-#example()
