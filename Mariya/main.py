@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from time import sleep
 import sys
+from time import sleep
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_module import Ui_Dialog
 import time 
@@ -19,12 +19,12 @@ def progress_bar(steps: int, max_lenght: int = 50) -> None:
 	return p 
 
 
+
 def request():
 	list_inn = read_exel_inn()
 	for item in list_inn:
 		for inn in item:
 			report_generation(get_organization(get_id(inn)), inn)
-			time.sleep(4)
 
 
 def main_Function():

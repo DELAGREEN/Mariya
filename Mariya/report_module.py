@@ -5,11 +5,6 @@ from openpyxl.styles import Border, Side, PatternFill, Font, GradientFill, Align
 import os
 from config_module import(path_to_data_dir, path_to_data, path_to_final_exel_file, path_to_loads_dir) 
 
-#def what_in_folder(path_to_request_dir):
-#    path_to_dir = os.listdir(path_to_request_dir)
-#    #print(f"список список файлов, из {path_to_request_dir} >> {path_to_dir}")
-#    return path_to_dir
-
 
 def make_book(path_to_data):
     '''
@@ -26,93 +21,20 @@ def make_dirs(path_to_data_dir):
     os.makedirs(path_to_data_dir)
 
 
-#def read_exel(path = path_to_data):
-#    list = []
-#    book = load_workbook(path, read_only=True)
-#    sheet = book.active
-#    for row in sheet.iter_rows(min_col = 1, max_col=1, min_row=1, max_row = sheet.max_row):
-#        #nim_row минимальное количество строк 
-#        #max_col максимальное количество столбцов 
-#        #max_row максильманое колличество строк
-#        for data in row:
-#            out = data.value
-#            if out not in list:
-#                list.append(out)
-#            else:
-#                break
-#    print(list)
-#    return list
-##read_exel(path_to_data)
-
-#def append_in_data(list, path_to_file = path_to_final_exel_file):
+#def add_style():
+#    '''
+#    Работает
+#    '''
+#    #from openpyxl import Workbook
+#    thin_border = Border(left=Side(style='thin'), 
+#                         right=Side(style='thin'), 
+#                         top=Side(style='thin'), 
+#                         bottom=Side(style='thick'))  #жирная полоса
 #    wb = Workbook()
 #    ws = wb.active
-#    #print(value)
-#    for item in list:
-#        ws.append(item)
-#    wb.save(path_to_file)
-#    return(print('append in data >> ok'))
+#    ws.cell(row=3, column=2).border = thin_border
+#    wb.save('border_test.xlsx')
 
-
-#def list_in_list(list):
-#    '''
-#    ОБЕРТКА СПИСОК В СПИСОК list[list[]]
-#    '''
-#    total_list = []
-#    for i in list:
-#        u = [i]
-#        total_list.append(u)
-#    return total_list
- 
-
-def add_style():
-    '''
-    Работает
-    '''
-    #from openpyxl import Workbook
-    thin_border = Border(left=Side(style='thin'), 
-                         right=Side(style='thin'), 
-                         top=Side(style='thin'), 
-                         bottom=Side(style='thick'))  #жирная полоса
-    wb = Workbook()
-    ws = wb.active
-    ws.cell(row=3, column=2).border = thin_border
-    wb.save('border_test.xlsx')
-
-
-
-#def passage_in_folder_files(path_to_dir):
-#    folder = what_in_folder(path_to_dir)
-#    i = '\\'
-#    data = read_exel(path_to_dir + i + folder[0], 11)
-#    for item in data:
-#        print(data.index(item), item)
-#
-##passage_in_folder_files(loads_dir)
-
-
-
-#def exel_reader(path_to_file) -> list:
-#    book = load_workbook(path_to_file, read_only=True)
-#    sheet = book.active
-#    ws = sheet['A1' : 'K16']
-#    list = []
-#    for row in ws:
-#        for cell in row:
-#                out = cell.value
-#                if out is not None:
-#                    list.append(out)
-#                    #print(list.index(out), out)
-#                else:
-#                    break
-#
-#    yield list
- 
-
-def example1(list):
-    for item in list:
-        index = list.index(item)
-        print(f'{index}>> {item}')
 
 def top_matrix_to_file(path_to_file) -> None:
     list = ['ИНН', 'Индекс формы', 'Наименование формы', 'Периодичность формы', 'Срок сдачи формы', 
@@ -171,7 +93,6 @@ def checking_existence_files():
 def writer_a_report_file(list, path_to_file = path_to_final_exel_file):
     wb = load_workbook(path_to_file)
     ws = wb.active
-    #for row in list:
     ws.append(list)
     wb.save(path_to_file)
     wb.close
@@ -179,16 +100,10 @@ def writer_a_report_file(list, path_to_file = path_to_final_exel_file):
 
 
 def formater_to_exel(path_to_file = path_to_final_exel_file):
-    # Импортируйте библиотеку `openpyxl`
-    # Создайте новую рабочую книгу Excel
+  
     wb = load_workbook(path_to_file)
-    # Активируйте лист в рабочей книге (который на данный момент будет единственным листом)
     ws = wb.active
-    print(ws.max_row)
-    #print(ws.max_col) 
-    #for row in sheet.iter_rows(min_col = 1, max_col=10, min_row=1, max_row = sheet.max_row):
-    #    print(row)
-    #print(sheet.row)
+    #print(ws.max_row)
 
     ws.column_dimensions['A'].width = 12    #размер колонки
     ws.column_dimensions['B'].width = 30    
@@ -199,9 +114,9 @@ def formater_to_exel(path_to_file = path_to_final_exel_file):
     ws.column_dimensions['G'].width = 60    
     ws.column_dimensions['H'].width = 15    
     ws.column_dimensions['I'].width = 15    
+    
     i = 1
-
-    while i <= ws.max_row:                  #max_row - максимальное колличество скрок
+    while i <= ws.max_row:     #max_row - максимальное колличество скрок
         ws[f'A{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    #Выравнивание текста по центру и перенос текста True
         ws[f'B{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
         ws[f'C{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
@@ -216,11 +131,8 @@ def formater_to_exel(path_to_file = path_to_final_exel_file):
         level = int(u/3)
         if level < 60:
             level = 60
-        print(level)
         ws.row_dimensions[i].height = level    #размер строки    
         i+=1
-        #print(i)
-
 
     wb.save(path_to_file)
     wb.close

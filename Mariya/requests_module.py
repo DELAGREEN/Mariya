@@ -2,11 +2,13 @@
 import requests
 from config_module import current_day, current_time
 from report_module import writer_a_report_file
+from time import sleep
 
 def report(list:list):
 	for orgnization in list:	
 		print(orgnization)
 		writer_a_report_file(orgnization)
+		sleep(0.5)
 
 
 def get_id(inn)->dict[str, int]:
