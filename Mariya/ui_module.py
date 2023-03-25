@@ -81,10 +81,6 @@ class Ui_Dialog(object):
         QMetaObject.connectSlotsByName(Dialog)
     # setupUi
 
-    def progress(self):
-        from main import progress_bar
-        progress = progress_bar(0)
-        return progress
 
     def button_clicked(self):
         from main import main_Function
