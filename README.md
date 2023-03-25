@@ -14,3 +14,5 @@
 python -m venv (имя виртуального окружения)   #создание виртуального акружения
 source ~/venv/bin/activate                    #применить виртуальное окружение for Linux
 path to venv\scripts\activate                 #применить виртуальное окружение for Windows
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=DELAGREEN&show_icons=true&theme=dark)](https://github.com/anuraghazra/github-readme-stats)
