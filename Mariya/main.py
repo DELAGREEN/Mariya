@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 import sys
+import asyncio
+import random
 from time import sleep
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_module import Ui_Dialog
 import time 
-from report_module import read_exel_inn, checking_existence_files, formater_to_exel
+from report_module import read_exel_inn, checking_existence_files
 from requests_module import get_id, get_organization, report_generation
 
 
-def progress_bar(steps: int, max_lenght: int = 50) -> None:
+async def progress_bar(steps: int, max_lenght: int = 50):
 	step_size = 50 / steps
 	#step_size = 100 / max_lenght
 	for i in range(1, steps + 1):
-		print(f'\r{int(i * step_size)}%', end='')
-		p = i * step_size
-		sleep(0.05)
-	print('')
-	return p 
-
+		print(f'\r{int(i * step_size)}%', end='')	#очень интересная тема
+		counter = int(i * step_size)
+		await asyncio.sleep(0.05)
+	print('')							#очень интересная тема ^^^
 
 
 def request():
@@ -27,7 +27,7 @@ def request():
 			report_generation(get_organization(get_id(inn)), inn)
 
 
-def main_Function():
+async def main_Function():
 	try:
 		request()
 	except Exception as ex:
@@ -39,7 +39,7 @@ class App(QMainWindow):
 		super(App, self).__init__()
 		self.ui = Ui_Dialog()
 		self.ui.setupUi(self)
-	
+
 
 if __name__ == '__main__':
 	start = time.time()

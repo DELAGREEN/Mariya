@@ -17,7 +17,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDialog, QLabel, QProgressBar,
     QPushButton, QSizePolicy, QWidget)
+import asyncio
 
+counter = 0
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -48,7 +50,7 @@ class Ui_Dialog(object):
         self.pushButton = QPushButton(Dialog)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setEnabled(True)
-        self.pushButton.setGeometry(QRect(250, 50, 121, 51))
+        self.pushButton.setGeometry(QRect(131, 50, 121, 51))
         self.pushButton.clicked.connect(self.button_clicked)   #Кликабельность кнопки
         self.pushButton.setCheckable(False)
         self.pushButton.setAutoRepeat(False)
@@ -57,8 +59,9 @@ class Ui_Dialog(object):
         self.progressBar.setGeometry(QRect(0, 120, 381, 23))
         #self.progressBar.connect(self.progress)             #прогресс бар
         self.progressBar.setMaximum(100)
+        #self.progressBar.setValue()
         self.progressBar.setValue(0)
-        #self.progressBar.connect()                #значение
+        #self.progressBar.setValue.connect(self.update)                #значение
         self.progressBar.setAlignment(Qt.AlignBottom|Qt.AlignHCenter)
         self.progressBar.setTextVisible(True)
         self.progressBar.setInvertedAppearance(False)
@@ -78,27 +81,13 @@ class Ui_Dialog(object):
         QMetaObject.connectSlotsByName(Dialog)
     # setupUi
 
-    def progress(self):
-        from main import progress_bar
-        progress = progress_bar(0)
-        return progress
 
     def button_clicked(self):
         from main import main_Function
         from report_module import formater_to_exel
-        main_Function()
+        asyncio.run(main_Function())
         formater_to_exel()
-        print('Тык1')
-
-
-
-    def downloadevent(self):
-        bar = QProgressBar()
-        thread = self.progress
-        bar.show()
-        thread.preprogress.connect(lambda x: bar.setMaximum(x))
-        thread.progress.connect(lambda d: self.bar.setValue(d))
-        thread.start()
+        print('-------ВЫПОЛНЕНО-------')
 
 
     def retranslateUi(self, Dialog):
