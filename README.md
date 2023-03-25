@@ -2,7 +2,7 @@
 
 ## Сборка .exe
 
-`(Путь к pyinstaller.exe) --noconfirm --onefile --console --paths ("Пуь к библиатекам, НАПРИМЕР: \venv\Lib\site-packages") (Путь к файлу: main.py) или его аналогу`
+`(Путь к ~\venv\pyinstaller.exe) --noconfirm --onefile --console --paths ("Пуь к библиатекам, НАПРИМЕР: ~\venv\Lib\site-packages") (Путь к файлу: main.py) или его аналогу`
 ____
 
 ### !!!ВАЖНО!!!
