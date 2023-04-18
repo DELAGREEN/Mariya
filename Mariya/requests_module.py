@@ -3,6 +3,7 @@ import requests
 from config_module import current_day, current_time
 #from report_module import writer_a_report_file
 from time import sleep
+import asyncio
 
 
 class RequestsModule(object):

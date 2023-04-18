@@ -13,23 +13,24 @@ class ReportModule(object):
         self.path_to_data_dir = path_to_data_dir
         self.path_to_data = path_to_data
         self.path_to_final_exel_file = path_to_final_exel_file
-        #self.list = list
+        return None
 
 
-    def make_book(self, path_to_data):
+    def make_book(self, path_to_data) -> None:
         '''
         Создаем xlsx файл для записи в него
         '''
         wb = Workbook()                         #Создает exel file
         wb.save(path_to_data)                   # сохнаняем с именем лежащей в переменной
+        return None
 
-
-    def make_dirs(self, path_to_data_dir):
+    def make_dirs(self, path_to_data_dir) -> None:
         path_to_data_dir = self.path_to_data_dir
         '''
         Создаем папки для рабочих 'ДЛЯ УДОБСТВА' процессов
         '''
         os.makedirs(path_to_data_dir)
+        return None
 
 # region important
     #def add_style():
@@ -77,7 +78,7 @@ class ReportModule(object):
         return list_inn
 
     @property
-    def checking_existence_files(self):
+    def checking_existence_files(self) -> None:
         ''' 
         Данный блок проверяет создан ли файл базы данных
         если нет, то просто создает его
@@ -103,16 +104,15 @@ class ReportModule(object):
         return None
 
 
-    def writer_a_report_file(self, list) -> None:
+    async def writer_a_report_file(self, list) -> None:
         wb = load_workbook(self.path_to_final_exel_file)
         ws = wb.active
         ws.append(list)
         wb.save(self.path_to_final_exel_file)
         wb.close
-#        return(print(f'writer_a_report_file >> ok'))
         return None
 
-    def formater_to_exel(self):
+    def formater_to_exel(self) -> None:
         
         wb = load_workbook(self.path_to_final_exel_file)
         ws = wb.active
@@ -166,4 +166,5 @@ class ReportModule(object):
 
         wb.save(self.path_to_final_exel_file)
         wb.close
+        return None
 

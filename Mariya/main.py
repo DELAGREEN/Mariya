@@ -25,24 +25,26 @@ async def request() -> None:
 	report = ReportModule()
 	list_inn = report.read_exel_inn()
 	for inn in list_inn:
+		print(inn)
 		data = request.report_generation(request.get_organization(request.get_id(inn)), inn)
+		print(data)
 		for organization in data:
-			report.writer_a_report_file(organization)
-			print('Write >> OK')
-			await asyncio.sleep(0.05)
+			await report.writer_a_report_file(organization)
+		print('Write >> OK')
+		await asyncio.sleep(2)
 	report.formater_to_exel()
 			
 
 async def main_Function():
-	try:
-		c1 = progress_bar(70)
-		c2 = request()
-		asyncio.create_task(c1)
-		asyncio.create_task(c2)
-		await c2
+	#try:
+		tasks = [
+			progress_bar(100, 100),
+	   		request()
+		]
+		await asyncio.gather(*tasks)
 		
-	except Exception as ex:
-		print(f'Ошибка: {ex}')
+	#except Exception as ex:
+	#	print(f'Ошибка: {ex}')
 
 
 class App(QMainWindow):
