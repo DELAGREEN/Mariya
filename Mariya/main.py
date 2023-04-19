@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 import sys
 import asyncio
-import random
+
 from time import sleep
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_module import Ui_Dialog
 import time 
-from report_module import read_exel_inn, checking_existence_files
-from requests_module import get_id, get_organization, report_generation
+
+from report_module import ReportModule
+from requests_module import RequestsModule #get_id, get_organization, report_generation
+
 
 
 async def progress_bar(steps: int, max_lenght: int = 50):
@@ -17,21 +19,37 @@ async def progress_bar(steps: int, max_lenght: int = 50):
 		print(f'\r{int(i * step_size)}%', end='')	#очень интересная тема
 		counter = int(i * step_size)
 		await asyncio.sleep(0.05)
-	print('')							#очень интересная тема ^^^
+
+	return('')										#очень интересная тема ^^^
 
 
-def request():
-	list_inn = read_exel_inn()
-	for item in list_inn:
-		for inn in item:
-			report_generation(get_organization(get_id(inn)), inn)
 
+async def request() -> None:
+	request = RequestsModule()
+	report = ReportModule()
+	list_inn = report.read_exel_inn()
+	for inn in list_inn:
+		print(inn)
+		data = request.report_generation(request.get_organization(request.get_id(inn)), inn)
+		print(data)
+		for organization in data:
+			await report.writer_a_report_file(organization)
+		print('Write >> OK')
+		await asyncio.sleep(2)
+	report.formater_to_exel()
+			
 
 async def main_Function():
-	try:
-		request()
-	except Exception as ex:
-		print(f'Ошибка: {ex}')
+	#try:
+		tasks = [
+			progress_bar(100, 100),
+	   		request()
+		]
+		await asyncio.gather(*tasks)
+		
+	#except Exception as ex:
+	#	print(f'Ошибка: {ex}')
+
 
 
 class App(QMainWindow):
@@ -41,19 +59,29 @@ class App(QMainWindow):
 		self.ui.setupUi(self)
 
 
-if __name__ == '__main__':
-	start = time.time()
-
-	checking_existence_files()
+def Start_app():
 
 	app = QApplication(sys.argv)
 	window = App()
 	window.show()
-
-
-	end = time.time()
-	total_time = (end - start)/60
-	print(f'Время выполнения: {total_time} мин.')
-
-
 	sys.exit(app.exec())	
+
+if __name__ == '__main__':
+#	start = time.time()
+
+	try:
+		report = ReportModule()
+		report.checking_existence_files
+		Start_app()
+
+	except Exception as ex:
+		print(f'Ошибка: {ex}')
+	
+
+
+
+
+#	end = time.time()
+#	total_time = (end - start)/60
+#	print(f'Время выполнения: {total_time} мин.')
+

@@ -61,7 +61,9 @@ class Ui_Dialog(object):
         self.progressBar.setMaximum(100)
         #self.progressBar.setValue()
         self.progressBar.setValue(0)
-        #self.progressBar.setValue.connect(self.update)                #значение
+
+        #self.progressBar.valueChanged()                #значение
+
         self.progressBar.setAlignment(Qt.AlignBottom|Qt.AlignHCenter)
         self.progressBar.setTextVisible(True)
         self.progressBar.setInvertedAppearance(False)
@@ -84,10 +86,10 @@ class Ui_Dialog(object):
 
     def button_clicked(self):
         from main import main_Function
-        from report_module import formater_to_exel
+
         asyncio.run(main_Function())
-        formater_to_exel()
-        print('-------ВЫПОЛНЕНО-------')
+        print('-------Программа завершила свою работу, возможно успешно!!-------')
+
 
 
     def retranslateUi(self, Dialog):
