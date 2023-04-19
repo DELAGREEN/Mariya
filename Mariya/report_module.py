@@ -167,4 +167,3 @@ class ReportModule(object):
         wb.save(self.path_to_final_exel_file)
         wb.close
         return None
-
