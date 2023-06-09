@@ -12,6 +12,9 @@ data.txt
 chromedriver.exe
 *.exe
 ui/
+build/
+dist/
+main.spec
 
 # User-specific files
 *.rsuser
@@ -395,3 +398,5 @@ Mariya/icon.ico
 .idea/Mariya.iml
 .idea/workspace.xml
 
+Mariya/test_ui.py
+Mariya/tttt.py
