@@ -11,6 +11,7 @@ data/
 data.txt
 chromedriver.exe
 *.exe
+ui/
 
 # User-specific files
 *.rsuser

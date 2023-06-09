@@ -19,7 +19,6 @@ from PySide6.QtWidgets import (QApplication, QDialog, QLabel, QProgressBar,
     QPushButton, QSizePolicy, QWidget)
 import asyncio
 
-counter = 0
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -57,10 +56,9 @@ class Ui_Dialog(object):
         self.progressBar = QProgressBar(Dialog)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setGeometry(QRect(0, 120, 381, 23))
-        #self.progressBar.connect(self.progress)             #прогресс бар
         self.progressBar.setMaximum(100)
-        #self.progressBar.setValue()
-        self.progressBar.setValue(0)
+        #self.progressBar.setValue(0)
+        #self.progressBar.valueChanged.connect(self.on_progress_change)
 
         #self.progressBar.valueChanged()                #значение
 
@@ -83,10 +81,8 @@ class Ui_Dialog(object):
         QMetaObject.connectSlotsByName(Dialog)
     # setupUi
 
-
     def button_clicked(self):
         from main import main_Function
-
         asyncio.run(main_Function())
         print('-------Программа завершила свою работу, возможно успешно!!-------')
 

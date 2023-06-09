@@ -8,8 +8,7 @@ from ui_module import Ui_Dialog
 import time 
 
 from report_module import ReportModule
-from requests_module import RequestsModule #get_id, get_organization, report_generation
-
+from requests_module import RequestsModule
 
 
 async def progress_bar(steps: int, max_lenght: int = 50):
@@ -19,31 +18,46 @@ async def progress_bar(steps: int, max_lenght: int = 50):
 		print(f'\r{int(i * step_size)}%', end='')	#очень интересная тема
 		counter = int(i * step_size)
 		await asyncio.sleep(0.05)
+#		Ui_Dialog.on_progress_change(10)
+		return counter
 
-	return('')										#очень интересная тема ^^^
+	#return('')										#очень интересная тема ^^^
 
 
-
-async def request() -> None:
-	request = RequestsModule()
-	report = ReportModule()
-	list_inn = report.read_exel_inn()
-	for inn in list_inn:
-		print(inn)
-		data = request.report_generation(request.get_organization(request.get_id(inn)), inn)
-		print(data)
-		for organization in data:
-			await report.writer_a_report_file(organization)
-		print('Write >> OK')
-		await asyncio.sleep(2)
-	report.formater_to_exel()
+#async def request() -> None:
+#	request = RequestsModule()
+#	report = ReportModule()
+#	list_inn = report.read_exel_inn()
+#	for inn in list_inn:
+#		print(inn)
+#		data = request.report_generation(request.get_organization(request.get_id(inn)), inn)
+#		print(data)
+#		for organization in data:
+#			await report.writer_a_report_file(organization)
+#		print('Write >> OK')
+#		await asyncio.sleep(2)
+#	report.formater_to_exel()
 			
+
+def request() -> None:
+	bufered_data = []
+	report = ReportModule()
+	for inn in report.read_exel_inn():
+		request = RequestsModule(inn).get_organization()
+		for data in request:
+			bufered_data.append(data)
+	return bufered_data
+
+async def write_in_exel() -> None:
+	report = ReportModule()
+	for data in request():
+		report.writer_a_report_file(data)
 
 async def main_Function():
 	#try:
 		tasks = [
 			progress_bar(100, 100),
-	   		request()
+	   		write_in_exel()
 		]
 		await asyncio.gather(*tasks)
 		
@@ -51,13 +65,12 @@ async def main_Function():
 	#	print(f'Ошибка: {ex}')
 
 
-
 class App(QMainWindow):
 	def __init__(self):
 		super(App, self).__init__()
 		self.ui = Ui_Dialog()
 		self.ui.setupUi(self)
-
+		#self.ui.progressBar.valueChanged(self.progress_bar)
 
 def Start_app():
 
@@ -84,4 +97,3 @@ if __name__ == '__main__':
 #	end = time.time()
 #	total_time = (end - start)/60
 #	print(f'Время выполнения: {total_time} мин.')
-

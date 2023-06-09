@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 import requests
 from config_module import current_day, current_time
-#from report_module import writer_a_report_file
-from time import sleep
-import asyncio
+from errors_loger import ErrorsLoger
+
+class RequestsModule():
+
+	def __init__(self, inn:int) -> None:
+		self.inn = inn
 
 
-class RequestsModule(object):
-
-
-	def get_id(self, inn:int)->dict[str, int]:
+	def _get_id(self)->int:
 		'''
 		с помощью данной функции будем получать ID  организации
 		для обращения к серверу напрямую
@@ -17,60 +17,54 @@ class RequestsModule(object):
 		website = 'https://websbor.gks.ru/webstat/api/gs/organizations'     
 		data = {
 		'okpo': '',
-		'inn': inn,
+		'inn': self.inn,
 		'ogrn': '',
 		'requestDateTime': f'{current_day} в {current_time}'
 		}
 		response = requests.post(website, data, verify= False).json()
-		id = response[0]
-		result_data = {
-			'id': id['id'],
-			'inn' : inn
+		result = response[0]
+		id = result['id']
+		return id
+
+
+	def get_organization(self)->list:
+		'''
+		с помощью данной функции получает list c данными(data) напрямую от сайта
+		'''
+		try:
+			id = self._get_id()
+			website = f'https://websbor.gks.ru/webstat/api/gs//organizations/{id}/forms'
+			data = {
+			'okpo': '',
+			'inn': self.inn,
+			'ogrn': '',
+			'requestDateTime': f'{current_day} в {current_time}'
 			}
-		return result_data
+			response = requests.get(website, data, verify= False).json()					
+			for item in response:
+				id = item['id']
+				name = item['name']
+				okud = item['okud']
+				form_period = item['form_period']
+				formatted_period = item['formatted_period']
+				reported_period = item['reported_period']
+				period = item['period']
+				period_comment = item['period_comment']
+				dept_nsi_id = item['dept_nsi_id']
+				dept_nsi_code = item['dept_nsi_code']
+				type_exam = item['type_exam']
+				index = item['index']
+				description = item['description']
+				act_num = item['act_num']
+				act_date = item['act_date']
+				end_time = item['end_time']
+				comment = item['comment']
+				updatingDate = item['updatingDate']
+				isValid = item['isValid']
+				periodicity =item ['periodicity']
+				periodNum = item['periodNum']
+				periodYear = item['periodYear']
+				yield [self.inn, index, name, form_period, end_time, reported_period, comment, okud]
 
-
-	def get_organization(self, data:dict)->dict:
-		'''
-		с помощью данной функции получает dict c данными(data) напрямую от сайта
-		'''
-
-		id = data['id']
-		inn = data['inn']
-		website = f'https://websbor.gks.ru/webstat/api/gs//organizations/{id}/forms'
-		data = {
-		'okpo': '',
-		'inn': inn,
-		'ogrn': '',
-		'requestDateTime': f'{current_day} в {current_time}'
-		}
-		response = requests.get(website, data, verify= False).json()
-		return response
-
-
-	def report_generation(self, data:dict, inn:int):
-		list1 = []
-		for item in data:
-			id = item['id']
-			name = item['name']
-			okud = item['okud']
-			form_period = item['form_period']
-			formatted_period = item['formatted_period']
-			reported_period = item['reported_period']
-			period = item['period']
-			period_comment = item['period_comment']
-			dept_nsi_id = item['dept_nsi_id']
-			dept_nsi_code = item['dept_nsi_code']
-			type_exam = item['type_exam']
-			index = item['index']
-			description = item['description']
-			act_num = item['act_num']
-			act_date = item['act_date']
-			end_time = item['end_time']
-			comment = item['comment']
-			updatingDate = item['updatingDate']
-			isValid = item['isValid']
-			periodicity =item ['periodicity']
-			periodNum = item['periodNum']
-			periodYear = item['periodYear']
-			yield [inn, index, name, form_period, end_time, reported_period, comment, okud]
+		except:
+			ErrorsLoger(f'{self.inn}').print_error_not_found_organization()
