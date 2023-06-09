@@ -57,9 +57,9 @@ class Ui_Dialog(object):
         self.pushButton.setAutoRepeat(False)
         self.progressBar = QProgressBar(Dialog)
         self.progressBar.setObjectName(u"progressBar")
-        #self.progressBar.setGeometry(QRect(0, 120, 381, 23))
+        self.progressBar.setGeometry(QRect(0, 120, 381, 23))
         self.progressBar.setMaximum(100)
-        
+        self.progressBar.setValue(0)
 
         #self.progressBar.valueChanged()                #значение
 
