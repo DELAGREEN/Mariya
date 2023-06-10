@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import requests
 from config_module import current_day, current_time
-from errors_loger import ErrorsLoger
+from errors_logger import ErrorsLogger
 
 class RequestsModule():
 
 	def __init__(self, inn:int) -> None:
-		self.inn = inn
+		self._inn = inn
 
 
 	def _get_id(self)->int:
@@ -17,7 +17,7 @@ class RequestsModule():
 		website = 'https://websbor.gks.ru/webstat/api/gs/organizations'     
 		data = {
 		'okpo': '',
-		'inn': self.inn,
+		'inn': self._inn,
 		'ogrn': '',
 		'requestDateTime': f'{current_day} в {current_time}'
 		}
@@ -36,7 +36,7 @@ class RequestsModule():
 			website = f'https://websbor.gks.ru/webstat/api/gs//organizations/{id}/forms'
 			data = {
 			'okpo': '',
-			'inn': self.inn,
+			'inn': self._inn,
 			'ogrn': '',
 			'requestDateTime': f'{current_day} в {current_time}'
 			}
@@ -64,7 +64,7 @@ class RequestsModule():
 				periodicity =item ['periodicity']
 				periodNum = item['periodNum']
 				periodYear = item['periodYear']
-				yield [self.inn, index, name, form_period, end_time, reported_period, comment, okud]
+				yield [self._inn, index, name, form_period, end_time, reported_period, comment, okud]
 
 		except:
-			ErrorsLoger(f'{self.inn}').print_error_not_found_organization()
+			ErrorsLogger(f'{self._inn}').print_error()

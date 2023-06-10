@@ -3,15 +3,15 @@ from openpyxl.workbook import Workbook as Workbook
 from openpyxl.reader.excel import load_workbook as load_workbook
 from openpyxl.styles import Border, Side, PatternFill, Font, GradientFill, Alignment
 import os
-from config_module import path_to_data_dir, path_to_data, path_to_final_exel_file, path_to_loads_dir 
+from config_module import path_to_data_dir, path_to_data, path_to_final_exel_file
 
 
 class ReportModule():
 
     def __init__(self) -> None:
-        self.path_to_data_dir = path_to_data_dir
-        self.path_to_data = path_to_data
-        self.path_to_final_exel_file = path_to_final_exel_file
+        self._path_to_data_dir = path_to_data_dir
+        self._path_to_data = path_to_data
+        self._path_to_final_exel_file = path_to_final_exel_file
         return None
 
     def _make_book(self, path_to_data) -> None:
@@ -59,7 +59,7 @@ class ReportModule():
 
     def read_exel_inn(self)->int:
         list_inn = []
-        book = load_workbook(self.path_to_data, read_only=True)
+        book = load_workbook(self._path_to_data, read_only=True)
         sheet = book.active
         for row in sheet.iter_rows(min_col = 1, max_col=1, min_row=1, max_row = sheet.max_row):
             #nim_row минимальное количество строк 
@@ -83,28 +83,28 @@ class ReportModule():
         '''
         Созадаем дерикторию
         '''
-        if not os.path.exists(self.path_to_data_dir):               # Проверяем есть ли ДИРЕКТОРИЯ с таким именем, если нет, создает
-            self._make_dirs(self.path_to_data_dir)
+        if not os.path.exists(self._path_to_data_dir):               # Проверяем есть ли ДИРЕКТОРИЯ с таким именем, если нет, создает
+            self._make_dirs(self._path_to_data_dir)
         '''
         Создаем базу данных в xlsx формате
         '''
-        if not os.path.exists(self.path_to_data):                   # проверяет существование пути, если нет, вызываем функцию создания
-            self._make_book(self.path_to_data)   
+        if not os.path.exists(self._path_to_data):                   # проверяет существование пути, если нет, вызываем функцию создания
+            self._make_book(self._path_to_data)   
 
         '''Сюда нужно еще написать вызов функции которая вызывает окно пользователя и говорит ему
         что база пустая и необходимо ее пополнить INN для прохождения по ней
         '''
 
-        if not os.path.exists(self.path_to_final_exel_file):
-            self._make_book(self.path_to_final_exel_file)
-            self._top_matrix_to_file(self.path_to_final_exel_file)
+        if not os.path.exists(self._path_to_final_exel_file):
+            self._make_book(self._path_to_final_exel_file)
+            self._top_matrix_to_file(self._path_to_final_exel_file)
         print('OK')
         return None
     
     @property
     def _formater_to_exel(self) -> None:
         
-        wb = load_workbook(self.path_to_final_exel_file)
+        wb = load_workbook(self._path_to_final_exel_file)
         ws = wb.active
         #print(ws.max_row)
         '''
@@ -151,15 +151,15 @@ class ReportModule():
             ws.row_dimensions[i].height = level                                                                 #размер строки    
             i+=1
 
-        wb.save(self.path_to_final_exel_file)
+        wb.save(self._path_to_final_exel_file)
         wb.close
         return None
 
     def writer_a_report_file(self, data:list) -> None:
-        wb = load_workbook(self.path_to_final_exel_file)
+        wb = load_workbook(self._path_to_final_exel_file)
         ws = wb.active
         ws.append(data)
-        wb.save(self.path_to_final_exel_file)
+        wb.save(self._path_to_final_exel_file)
         wb.close
         self._formater_to_exel
         return None
