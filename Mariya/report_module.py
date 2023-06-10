@@ -3,6 +3,20 @@ from openpyxl.workbook import Workbook as Workbook
 from openpyxl.reader.excel import load_workbook as load_workbook
 from openpyxl.styles import Border, Side, PatternFill, Font, GradientFill, Alignment
 import os
+
+from config_module import path_to_data_dir, path_to_data, path_to_final_exel_file
+
+
+class ReportModule():
+
+    def __init__(self) -> None:
+        self._path_to_data_dir = path_to_data_dir
+        self._path_to_data = path_to_data
+        self._path_to_final_exel_file = path_to_final_exel_file
+        return None
+
+    def _make_book(self, path_to_data) -> None:
+
 from config_module import path_to_data_dir, path_to_data, path_to_final_exel_file, path_to_loads_dir 
 import asyncio
 
@@ -17,6 +31,7 @@ class ReportModule(object):
 
 
     def make_book(self, path_to_data) -> None:
+
         '''
         Создаем xlsx файл для записи в него
         '''
@@ -24,8 +39,8 @@ class ReportModule(object):
         wb.save(path_to_data)                   # сохнаняем с именем лежащей в переменной
         return None
 
-    def make_dirs(self, path_to_data_dir) -> None:
-        path_to_data_dir = self.path_to_data_dir
+    def _make_dirs(self, path_to_data_dir) -> None:
+
         '''
         Создаем папки для рабочих 'ДЛЯ УДОБСТВА' процессов
         '''
@@ -48,7 +63,8 @@ class ReportModule(object):
     #    wb.save('border_test.xlsx')
 #endregion
 
-    def top_matrix_to_file(self, path_to_file) -> None:
+
+    def _top_matrix_to_file(self, path_to_file) -> None:
         list = ['ИНН', 'Индекс формы', 'Наименование формы', 'Периодичность формы', 'Срок сдачи формы', 
                 'Отчетный период','Комментарий', 'ОКУД', 'Дата актуализации перечня форм']
                 
@@ -59,23 +75,24 @@ class ReportModule(object):
         wb.save(path_to_file)
         wb.close
         return None
-    #top_matrix_to_file(test)
 
 
-    def read_exel_inn(self)->list[int]:
+    def read_exel_inn(self)->int:
         list_inn = []
-        book = load_workbook(self.path_to_data, read_only=True)
+        book = load_workbook(self._path_to_data, read_only=True)
+
         sheet = book.active
         for row in sheet.iter_rows(min_col = 1, max_col=1, min_row=1, max_row = sheet.max_row):
             #nim_row минимальное количество строк 
             #max_col максимальное количество столбцов 
             #max_row максильманое колличество строк
             for data in row:
-                out = data.value
-                if type(out) is int and out not in list_inn:
-                    list_inn.append(out)
-                    #print(out)
-        return list_inn
+
+                inn = data.value
+                if type(inn) is int and inn not in list_inn:
+                    list_inn.append(inn)
+                    yield inn
+
 
     @property
     def checking_existence_files(self) -> None:
@@ -83,38 +100,33 @@ class ReportModule(object):
         Данный блок проверяет создан ли файл базы данных
         если нет, то просто создает его
         таким образом мы пытаемся обойти ошибки со стороны 
-        обработки программой
+        обработки
         '''
+
         '''
         Созадаем дерикторию
         '''
-        if not os.path.exists(self.path_to_data_dir):               # Проверяем есть ли ДИРЕКТОРИЯ с таким именем, если нет, создает
-            self.make_dirs(self.path_to_data_dir)
+        if not os.path.exists(self._path_to_data_dir):               # Проверяем есть ли ДИРЕКТОРИЯ с таким именем, если нет, создает
+            self._make_dirs(self._path_to_data_dir)
         '''
         Создаем базу данных в xlsx формате
         '''
-        if not os.path.exists(self.path_to_data):                   # проверяет существование пути, если нет, вызываем функцию создания
-            self.make_book(self.path_to_data)                             
-                                                                    # Сюда нужно еще написать вызов функции которая вызывает окно пользователя и говорит ему
-                                                                    # что база пустая и необходимо ее пополнить INN для прохождения по ней
-        if not os.path.exists(self.path_to_final_exel_file):
-            self.make_book(self.path_to_final_exel_file)
-            self.top_matrix_to_file(self.path_to_final_exel_file)
+        if not os.path.exists(self._path_to_data):                   # проверяет существование пути, если нет, вызываем функцию создания
+            self._make_book(self._path_to_data)   
+
+        '''Сюда нужно еще написать вызов функции которая вызывает окно пользователя и говорит ему
+        что база пустая и необходимо ее пополнить INN для прохождения по ней
+        '''
+
+        if not os.path.exists(self._path_to_final_exel_file):
+            self._make_book(self._path_to_final_exel_file)
+            self._top_matrix_to_file(self._path_to_final_exel_file)
         print('OK')
         return None
-
-
-    async def writer_a_report_file(self, list) -> None:
-        wb = load_workbook(self.path_to_final_exel_file)
-        ws = wb.active
-        ws.append(list)
-        wb.save(self.path_to_final_exel_file)
-        wb.close
-        return None
-
-    def formater_to_exel(self) -> None:
-        
-        wb = load_workbook(self.path_to_final_exel_file)
+    
+    @property
+    def _formater_to_exel(self) -> None:
+        wb = load_workbook(self._path_to_final_exel_file)
         ws = wb.active
         #print(ws.max_row)
         '''
@@ -129,7 +141,7 @@ class ReportModule(object):
         ws.column_dimensions['G'].width = 65    
         ws.column_dimensions['H'].width = 15    
         ws.column_dimensions['I'].width = 15    
-        
+
         ''' 
         первую строку пропускаем,
         узнаем максимальное колличество строк в документе
@@ -145,8 +157,7 @@ class ReportModule(object):
             ws[f'G{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
             ws[f'H{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
             ws[f'I{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
-            
-            
+
             '''
             делаем выравнивание по высоте,
             т.к G ячейка самая большая, ориентируюсь на нее
@@ -164,6 +175,15 @@ class ReportModule(object):
             ws.row_dimensions[i].height = level                                                                 #размер строки    
             i+=1
 
-        wb.save(self.path_to_final_exel_file)
+        wb.save(self._path_to_final_exel_file)
         wb.close
+        return None
+
+    def writer_a_report_file(self, data:list) -> None:
+        wb = load_workbook(self._path_to_final_exel_file)
+        ws = wb.active
+        ws.append(data)
+        wb.save(self._path_to_final_exel_file)
+        wb.close
+        self._formater_to_exel
         return None
