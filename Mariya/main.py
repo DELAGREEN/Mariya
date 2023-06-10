@@ -11,6 +11,7 @@ from report_module import ReportModule
 from requests_module import RequestsModule
 
 
+
 class App(QMainWindow):
 	def __init__(self):
 		super(App, self).__init__()
@@ -20,12 +21,11 @@ class App(QMainWindow):
 
 
 def Start_app():
-	
+
 	app = QApplication(sys.argv)
 	window = App()
 	window.show()
 	sys.exit(app.exec())	
-
 
 
 if __name__ == '__main__':
@@ -40,9 +40,7 @@ if __name__ == '__main__':
 		print(f'Ошибка: {ex}')
 	
 
-
-
-
 #	end = time.time()
 #	total_time = (end - start)/60
 #	print(f'Время выполнения: {total_time} мин.')
+

@@ -3,6 +3,7 @@ from openpyxl.workbook import Workbook as Workbook
 from openpyxl.reader.excel import load_workbook as load_workbook
 from openpyxl.styles import Border, Side, PatternFill, Font, GradientFill, Alignment
 import os
+
 from config_module import path_to_data_dir, path_to_data, path_to_final_exel_file
 
 
@@ -15,6 +16,22 @@ class ReportModule():
         return None
 
     def _make_book(self, path_to_data) -> None:
+
+from config_module import path_to_data_dir, path_to_data, path_to_final_exel_file, path_to_loads_dir 
+import asyncio
+
+
+
+class ReportModule(object):
+    def __init__(self) -> None:
+        self.path_to_data_dir = path_to_data_dir
+        self.path_to_data = path_to_data
+        self.path_to_final_exel_file = path_to_final_exel_file
+        return None
+
+
+    def make_book(self, path_to_data) -> None:
+
         '''
         Создаем xlsx файл для записи в него
         '''
@@ -23,6 +40,7 @@ class ReportModule():
         return None
 
     def _make_dirs(self, path_to_data_dir) -> None:
+
         '''
         Создаем папки для рабочих 'ДЛЯ УДОБСТВА' процессов
         '''
@@ -45,6 +63,7 @@ class ReportModule():
     #    wb.save('border_test.xlsx')
 #endregion
 
+
     def _top_matrix_to_file(self, path_to_file) -> None:
         list = ['ИНН', 'Индекс формы', 'Наименование формы', 'Периодичность формы', 'Срок сдачи формы', 
                 'Отчетный период','Комментарий', 'ОКУД', 'Дата актуализации перечня форм']
@@ -57,19 +76,23 @@ class ReportModule():
         wb.close
         return None
 
+
     def read_exel_inn(self)->int:
         list_inn = []
         book = load_workbook(self._path_to_data, read_only=True)
+
         sheet = book.active
         for row in sheet.iter_rows(min_col = 1, max_col=1, min_row=1, max_row = sheet.max_row):
             #nim_row минимальное количество строк 
             #max_col максимальное количество столбцов 
             #max_row максильманое колличество строк
             for data in row:
+
                 inn = data.value
                 if type(inn) is int and inn not in list_inn:
                     list_inn.append(inn)
                     yield inn
+
 
     @property
     def checking_existence_files(self) -> None:
@@ -103,7 +126,6 @@ class ReportModule():
     
     @property
     def _formater_to_exel(self) -> None:
-        
         wb = load_workbook(self._path_to_final_exel_file)
         ws = wb.active
         #print(ws.max_row)
@@ -119,6 +141,7 @@ class ReportModule():
         ws.column_dimensions['G'].width = 65    
         ws.column_dimensions['H'].width = 15    
         ws.column_dimensions['I'].width = 15    
+
         ''' 
         первую строку пропускаем,
         узнаем максимальное колличество строк в документе
@@ -134,6 +157,7 @@ class ReportModule():
             ws[f'G{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
             ws[f'H{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
             ws[f'I{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+
             '''
             делаем выравнивание по высоте,
             т.к G ячейка самая большая, ориентируюсь на нее
@@ -163,9 +187,3 @@ class ReportModule():
         wb.close
         self._formater_to_exel
         return None
-    
-    
-    
-#r = ReportModule()
-#for i in r.read_exel_inn():
-#    print(i)

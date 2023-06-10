@@ -82,6 +82,7 @@ class Ui_Dialog(object):
         QMetaObject.connectSlotsByName(Dialog)
     # setupUi
 
+
     def button_click(self):
         self.update_progress(40, 60)
         asyncio.run(main_Function())
@@ -95,6 +96,7 @@ class Ui_Dialog(object):
             self.progressBar.setGeometry(0, 120, 381, 23)
             self.progressBar.show()
             time.sleep(0.1)
+
 
 
     def retranslateUi(self, Dialog):
