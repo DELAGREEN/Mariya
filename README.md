@@ -1,20 +1,3 @@
-# Mariya
-
-## Сборка .exe
-
-`(Путь к ~\venv\pyinstaller.exe) --noconfirm --onefile --console --paths ("Пуь к библиатекам, НАПРИМЕР: ~\venv\Lib\site-packages") (Путь к файлу: main.py или его аналог)`
-____
-
-### !!!ВАЖНО!!!
-Сборку производить из под виртуального окружения
-____
-
-### Напоминалка: 
-**`python -m venv (наименование виртуального окружения)`**   #создание виртуального окружения
-
-**`source ~/venv/bin/activate`**                    #применить виртуальное окружение for Linux
-
-**`path to venv\scripts\activate`**                 #применить виртуальное окружение for Windows
-____
+Программа создавалась для N, с челью автоматизации выгрузки статистики (из Росстата) по организациям и формирования соответствующего exel файла. 
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=DELAGREEN&show_icons=true&theme=dark)](https://github.com/anuraghazra/github-readme-stats)
