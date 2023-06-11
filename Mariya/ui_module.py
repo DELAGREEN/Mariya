@@ -18,9 +18,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QDialog, QLabel, QProgressBar,
     QPushButton, QSizePolicy, QWidget)
 import asyncio
-#from main import main_Function
-import time
-from factory import main_Function
+
+counter = 0
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -52,13 +51,15 @@ class Ui_Dialog(object):
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setEnabled(True)
         self.pushButton.setGeometry(QRect(131, 50, 121, 51))
-        self.pushButton.clicked.connect(self.button_click)   #Кликабельность кнопки
+        self.pushButton.clicked.connect(self.button_clicked)   #Кликабельность кнопки
         self.pushButton.setCheckable(False)
         self.pushButton.setAutoRepeat(False)
         self.progressBar = QProgressBar(Dialog)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setGeometry(QRect(0, 120, 381, 23))
+        #self.progressBar.connect(self.progress)             #прогресс бар
         self.progressBar.setMaximum(100)
+        #self.progressBar.setValue()
         self.progressBar.setValue(0)
 
         #self.progressBar.valueChanged()                #значение
@@ -83,19 +84,11 @@ class Ui_Dialog(object):
     # setupUi
 
 
-    def button_click(self):
-        self.update_progress(40, 60)
+    def button_clicked(self):
+        from main import main_Function
+
         asyncio.run(main_Function())
-        self.update_progress(100)
-        return None
-
-
-    def update_progress(self, value1=0, value2=101):
-        for i in range(value1, value2):
-            self.progressBar.setValue(i)
-            self.progressBar.setGeometry(0, 120, 381, 23)
-            self.progressBar.show()
-            time.sleep(0.1)
+        print('-------Программа завершила свою работу, возможно успешно!!-------')
 
 
 
