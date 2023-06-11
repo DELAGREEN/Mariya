@@ -22,6 +22,7 @@ class ReportModule():
         wb.save(path_to_data)                   # сохнаняем с именем лежащей в переменной
         return None
 
+
     def _make_dirs(self, path_to_data_dir) -> None:
         '''
         Создаем папки для рабочих 'ДЛЯ УДОБСТВА' процессов
@@ -45,6 +46,7 @@ class ReportModule():
     #    wb.save('border_test.xlsx')
 #endregion
 
+
     def _top_matrix_to_file(self, path_to_file) -> None:
         list = ['ИНН', 'Индекс формы', 'Наименование формы', 'Периодичность формы', 'Срок сдачи формы', 
                 'Отчетный период','Комментарий', 'ОКУД', 'Дата актуализации перечня форм']
@@ -56,6 +58,7 @@ class ReportModule():
         wb.save(path_to_file)
         wb.close
         return None
+
 
     def read_exel_inn(self)->int:
         list_inn = []
@@ -119,6 +122,7 @@ class ReportModule():
         ws.column_dimensions['G'].width = 65    
         ws.column_dimensions['H'].width = 15    
         ws.column_dimensions['I'].width = 15    
+
         ''' 
         первую строку пропускаем,
         узнаем максимальное колличество строк в документе
@@ -134,6 +138,7 @@ class ReportModule():
             ws[f'G{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
             ws[f'H{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)    
             ws[f'I{i}'].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+
             '''
             делаем выравнивание по высоте,
             т.к G ячейка самая большая, ориентируюсь на нее
@@ -151,6 +156,7 @@ class ReportModule():
             ws.row_dimensions[i].height = level                                                                 #размер строки    
             i+=1
 
+
         wb.save(self._path_to_final_exel_file)
         wb.close
         return None
@@ -163,9 +169,4 @@ class ReportModule():
         wb.close
         self._formater_to_exel
         return None
-    
-    
-    
-#r = ReportModule()
-#for i in r.read_exel_inn():
-#    print(i)
+      

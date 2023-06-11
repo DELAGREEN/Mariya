@@ -82,6 +82,7 @@ class Ui_Dialog(object):
         QMetaObject.connectSlotsByName(Dialog)
     # setupUi
 
+
     def button_click(self):
         self.update_progress(40, 60)
         asyncio.run(main_Function())
