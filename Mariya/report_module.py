@@ -52,8 +52,7 @@ class ReportModule():
 
     def _top_matrix_to_file(self, path_to_file) -> None:
         list = ['ИНН', 'Индекс формы', 'Наименование формы', 'Периодичность формы', 'Срок сдачи формы', 
-                'Отчетный период','Комментарий', 'ОКУД', 'Дата актуализации перечня форм']
-                
+                'Отчетный период','Комментарий', 'ОКУД', 'Дата актуализации перечня форм']  
         #wb = Workbook()
         wb = load_workbook(filename= path_to_file)
         ws = wb.active
@@ -64,7 +63,7 @@ class ReportModule():
 
 
     def read_exel_inn(self)->int:
-        list_inn = []
+        _list_inn = []
         book = load_workbook(self._path_to_data, read_only=True)
         sheet = book.active
         for row in sheet.iter_rows(min_col = 1, max_col=1, min_row=1, max_row = sheet.max_row):
@@ -73,8 +72,8 @@ class ReportModule():
             #max_row максильманое колличество строк
             for data in row:
                 inn = data.value
-                if type(inn) is int and inn not in list_inn:
-                    list_inn.append(inn)
+                if type(inn) is int and inn not in _list_inn:
+                    _list_inn.append(inn)
                     yield inn
 
 
@@ -92,6 +91,7 @@ class ReportModule():
         '''
         if not os.path.exists(self._path_to_data_dir):               # Проверяем есть ли ДИРЕКТОРИЯ с таким именем, если нет, создает
             self._make_dirs(self._path_to_data_dir)
+
         '''
         Создаем базу данных в xlsx формате
         '''
@@ -101,7 +101,6 @@ class ReportModule():
         '''Сюда нужно еще написать вызов функции которая вызывает окно пользователя и говорит ему
         что база пустая и необходимо ее пополнить INN для прохождения по ней
         '''
-
         if not os.path.exists(self._path_to_final_exel_file):
             self._make_book(self._path_to_final_exel_file)
             self._top_matrix_to_file(self._path_to_final_exel_file)
@@ -111,7 +110,6 @@ class ReportModule():
     
     @property
     def _formater_to_exel(self) -> None:
-        
         wb = load_workbook(self._path_to_final_exel_file)
         ws = wb.active
         #print(ws.max_row)
@@ -160,7 +158,6 @@ class ReportModule():
                 level = 60
             ws.row_dimensions[i].height = level                                                                 #размер строки    
             i+=1
-
 
         wb.save(self._path_to_final_exel_file)
         wb.close

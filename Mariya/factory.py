@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import asyncio
-from time import sleep
 from report_module import ReportModule
 from requests_module import RequestsModule
 

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import sys
-from time import sleep
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_module import Ui_Dialog
 from report_module import ReportModule

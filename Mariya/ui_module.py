@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 ################################################################################
 ## Form generated from reading UI file 'untitled.ui'
 ##
@@ -18,7 +17,6 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QDialog, QLabel, QProgressBar,
     QPushButton, QSizePolicy, QWidget)
 import asyncio
-#from main import main_Function
 import time
 from factory import main_Function
 
@@ -61,9 +59,6 @@ class Ui_Dialog(object):
         self.progressBar.setGeometry(QRect(0, 120, 381, 23))
         self.progressBar.setMaximum(100)
         self.progressBar.setValue(0)
-
-        #self.progressBar.valueChanged()                #значение
-
         self.progressBar.setAlignment(Qt.AlignBottom|Qt.AlignHCenter)
         self.progressBar.setTextVisible(True)
         self.progressBar.setInvertedAppearance(False)
@@ -74,9 +69,7 @@ class Ui_Dialog(object):
         font = QFont()
         font.setPointSize(12)
         self.label.setFont(font)
-
         self.retranslateUi(Dialog)
-
         self.pushButton.setDefault(True)
 
 

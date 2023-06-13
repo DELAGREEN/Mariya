@@ -52,5 +52,4 @@ logging.info("An INFO")
 logging.warning("A WARNING")
 logging.error("An ERROR")
 logging.critical("A message of CRITICAL severity")
-
 '''
