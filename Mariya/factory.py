@@ -1,11 +1,6 @@
-
 # -*- coding: utf-8 -*-
-import sys
 import asyncio
-
 from time import sleep
-import time 
-
 from report_module import ReportModule
 from requests_module import RequestsModule
 
@@ -38,10 +33,12 @@ def request() -> None:
 			bufered_data.append(data)
 	return bufered_data
 
+
 async def write_in_exel() -> None:
 	report = ReportModule()
 	for data in request():
 		report.writer_a_report_file(data)
+
 
 async def main_Function():
 	#try:

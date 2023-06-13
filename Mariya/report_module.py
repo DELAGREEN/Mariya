@@ -8,11 +8,13 @@ from config_module import path_to_data_dir, path_to_data, path_to_final_exel_fil
 
 class ReportModule():
 
+
     def __init__(self) -> None:
         self._path_to_data_dir = path_to_data_dir
         self._path_to_data = path_to_data
         self._path_to_final_exel_file = path_to_final_exel_file
         return None
+    
 
     def _make_book(self, path_to_data) -> None:
         '''
@@ -29,6 +31,7 @@ class ReportModule():
         '''
         os.makedirs(path_to_data_dir)
         return None
+    
 
 # region important
     #def add_style():
@@ -74,6 +77,7 @@ class ReportModule():
                     list_inn.append(inn)
                     yield inn
 
+
     @property
     def checking_existence_files(self) -> None:
         ''' 
@@ -103,6 +107,7 @@ class ReportModule():
             self._top_matrix_to_file(self._path_to_final_exel_file)
         print('OK')
         return None
+    
     
     @property
     def _formater_to_exel(self) -> None:
@@ -160,6 +165,7 @@ class ReportModule():
         wb.save(self._path_to_final_exel_file)
         wb.close
         return None
+    
 
     def writer_a_report_file(self, data:list) -> None:
         wb = load_workbook(self._path_to_final_exel_file)

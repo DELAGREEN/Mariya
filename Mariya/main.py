@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 import sys
-import asyncio
-
 from time import sleep
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_module import Ui_Dialog
-import time 
 from report_module import ReportModule
-from requests_module import RequestsModule
 
 
 class App(QMainWindow):

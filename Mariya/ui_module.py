@@ -22,6 +22,7 @@ import asyncio
 import time
 from factory import main_Function
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
